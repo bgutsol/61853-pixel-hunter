@@ -1,7 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Bohdan Hutsol](https://up.htmlacademy.ru/ecmascript/4/user/61853).
-* Наставник: `Неизвестно`.
+* Наставник: [Егор Огарков](https://htmlacademy.ru/profile/id58697).
 
 ---
 
