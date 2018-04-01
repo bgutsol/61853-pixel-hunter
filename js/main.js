@@ -37,5 +37,5 @@ const handleDocumentKeyPress = function (e) {
   }
 };
 
-changeScreen(0);
+/*changeScreen(0);*/
 document.onkeydown = document.onkeyup = handleDocumentKeyPress;
