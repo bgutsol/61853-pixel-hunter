@@ -27,10 +27,10 @@ const html = `<div class="greeting central--blur">
 
 const template = htmlToTemplate(html);
 
-template.querySelector(`.greeting__continue`).onclick = (e) => {
+template.querySelector(`.greeting__continue`).addEventListener(`click`, (e) => {
   e.preventDefault();
 
   changeView(rules);
-};
+});
 
 export default template;

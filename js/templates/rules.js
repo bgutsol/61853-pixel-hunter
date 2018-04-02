@@ -39,17 +39,18 @@ const html = `<header class="header">
 
 const template = htmlToTemplate(html);
 
-template.querySelector(`.back`).onclick = (e) => {
+template.querySelector(`.back`).addEventListener(`click`, (e) => {
   e.preventDefault();
 
   changeView(greeting);
-};
+});
 
 const btnSubmit = template.querySelector(`.rules__button`);
 
-template.querySelector(`.rules__input`).oninput = function () {
-  btnSubmit.disabled = !this.value;
-};
+template.querySelector(`.rules__input`).addEventListener(`input`, function (e) {
+  const self = e.target;
+  btnSubmit.disabled = !self.value;
+});
 
 template.querySelector(`.rules__form`).addEventListener(`submit`, (e) => {
   e.preventDefault();

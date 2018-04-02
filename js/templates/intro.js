@@ -20,10 +20,10 @@ const html = `<div id="main" class="central__content">
 
 const template = htmlToTemplate(html);
 
-template.querySelector(`.intro__asterisk`).onclick = (e) => {
+template.querySelector(`.intro__asterisk`).addEventListener(`click`, (e) => {
   e.preventDefault();
 
   changeView(greeting);
-};
+});
 
 export default template;

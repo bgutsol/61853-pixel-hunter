@@ -70,15 +70,14 @@ const html = `<header class="header">
 
 const template = htmlToTemplate(html);
 
-template.querySelector(`.back`).onclick = (e) => {
+template.querySelector(`.back`).addEventListener(`click`, (e) => {
   e.preventDefault();
 
   changeView(greeting);
-};
+});
 
 const inputs = template.querySelectorAll(`input[type=radio]`);
 const inputsByName = {};
-
 const handleInputChange = function (e) {
   const self = e.target;
   inputsByName[self.name] = self.checked;

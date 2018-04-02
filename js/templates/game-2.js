@@ -59,11 +59,11 @@ const html = `<header class="header">
 
 const template = htmlToTemplate(html);
 
-template.querySelector(`.back`).onclick = (e) => {
+template.querySelector(`.back`).addEventListener(`click`, (e) => {
   e.preventDefault();
 
   changeView(greeting);
-};
+});
 
 const answers = template.querySelectorAll(`.game__answer`);
 const handleAnswerClick = () => {
