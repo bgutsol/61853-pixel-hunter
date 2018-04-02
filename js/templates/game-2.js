@@ -1,6 +1,8 @@
-import {htmlToTemplate} from "../util";
+import {htmlToTemplate, changeView} from '../util';
+import greeting from './greeting';
+import game3 from './game-3';
 
-const templateHtml = `<header class="header">
+const html = `<header class="header">
     <div class="header__back">
       <button class="back">
         <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
@@ -55,4 +57,21 @@ const templateHtml = `<header class="header">
     </div>
   </footer>`;
 
-export default htmlToTemplate(templateHtml);
+const template = htmlToTemplate(html);
+
+template.querySelector(`.back`).onclick = (e) => {
+  e.preventDefault();
+
+  changeView(greeting);
+};
+
+const answers = template.querySelectorAll(`.game__answer`);
+const handleAnswerClick = () => {
+  changeView(game3);
+};
+
+for (let i = 0; i < answers.length; i++) {
+  answers[i].addEventListener(`click`, handleAnswerClick);
+}
+
+export default template;

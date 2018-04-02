@@ -1,6 +1,8 @@
-import {htmlToTemplate} from "../util";
+import {htmlToTemplate, changeView} from '../util';
+import greeting from './greeting';
+import game2 from './game-2';
 
-const templateHtml = `<header class="header">
+const html = `<header class="header">
     <div class="header__back">
       <button class="back">
         <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
@@ -66,4 +68,29 @@ const templateHtml = `<header class="header">
     </div>
   </footer>`;
 
-export default htmlToTemplate(templateHtml);
+const template = htmlToTemplate(html);
+
+template.querySelector(`.back`).onclick = (e) => {
+  e.preventDefault();
+
+  changeView(greeting);
+};
+
+const inputs = template.querySelectorAll(`input[type=radio]`);
+const inputsByName = {};
+
+const handleInputChange = function (e) {
+  const self = e.target;
+  inputsByName[self.name] = self.checked;
+
+  if (inputsByName.question1 && inputsByName.question2) {
+    changeView(game2);
+  }
+};
+
+for (let i = 0; i < inputs.length; i++) {
+  inputs[i].addEventListener(`change`, handleInputChange);
+}
+
+
+export default template;

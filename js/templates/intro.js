@@ -1,6 +1,7 @@
-import {htmlToTemplate} from "../util";
+import {htmlToTemplate, changeView} from '../util';
+import greeting from './greeting';
 
-const templateHtml = `<div id="main" class="central__content">
+const html = `<div id="main" class="central__content">
     <div id="intro" class="intro">
       <h1 class="intro__asterisk">*</h1>
       <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
@@ -17,4 +18,12 @@ const templateHtml = `<div id="main" class="central__content">
     </div>
   </footer>`;
 
-export default htmlToTemplate(templateHtml);
+const template = htmlToTemplate(html);
+
+template.querySelector(`.intro__asterisk`).onclick = (e) => {
+  e.preventDefault();
+
+  changeView(greeting);
+};
+
+export default template;

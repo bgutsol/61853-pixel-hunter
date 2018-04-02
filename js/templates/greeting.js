@@ -1,6 +1,7 @@
-import {htmlToTemplate} from "../util";
+import {htmlToTemplate, changeView} from '../util';
+import rules from './rules';
 
-const templateHtml = `<div class="greeting central--blur">
+const html = `<div class="greeting central--blur">
     <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
     <h1 class="greeting__asterisk">*</h1>
     <div class="greeting__challenge">
@@ -24,4 +25,12 @@ const templateHtml = `<div class="greeting central--blur">
     </div>
   </footer>`;
 
-export default htmlToTemplate(templateHtml);
+const template = htmlToTemplate(html);
+
+template.querySelector(`.greeting__continue`).onclick = (e) => {
+  e.preventDefault();
+
+  changeView(rules);
+};
+
+export default template;

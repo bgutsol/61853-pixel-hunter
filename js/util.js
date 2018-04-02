@@ -1,7 +1,14 @@
 const htmlToTemplate = (html) => {
-  const template = document.createElement('template');
+  const template = document.createElement(`div`);
   template.innerHTML = html;
   return template;
 };
 
-export { htmlToTemplate };
+const main = document.querySelector(`main.central`);
+
+const changeView = (template) => {
+  main.innerHTML = ``;
+  main.appendChild(template);
+};
+
+export {htmlToTemplate, changeView};
