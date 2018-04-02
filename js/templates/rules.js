@@ -48,8 +48,8 @@ template.querySelector(`.back`).addEventListener(`click`, (e) => {
 const btnSubmit = template.querySelector(`.rules__button`);
 
 template.querySelector(`.rules__input`).addEventListener(`input`, function (e) {
-  const self = e.target;
-  btnSubmit.disabled = !self.value;
+  const input = e.target;
+  btnSubmit.disabled = !input.value;
 });
 
 template.querySelector(`.rules__form`).addEventListener(`submit`, (e) => {

@@ -79,8 +79,8 @@ template.querySelector(`.back`).addEventListener(`click`, (e) => {
 const inputs = template.querySelectorAll(`input[type=radio]`);
 const inputsByName = {};
 const handleInputChange = function (e) {
-  const self = e.target;
-  inputsByName[self.name] = self.checked;
+  const input = e.target;
+  inputsByName[input.name] = input.checked;
 
   if (inputsByName.question1 && inputsByName.question2) {
     changeView(game2);
