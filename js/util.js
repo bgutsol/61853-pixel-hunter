@@ -1,4 +1,4 @@
-const htmlToTemplate = (html) => {
+const createElement = (html = ``) => {
   const template = document.createElement(`div`);
   template.innerHTML = html;
   return template;
@@ -11,4 +11,4 @@ const changeView = (template) => {
   main.appendChild(template);
 };
 
-export {htmlToTemplate, changeView};
+export {createElement, changeView};
