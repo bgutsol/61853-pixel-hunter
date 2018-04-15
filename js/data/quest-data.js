@@ -9,26 +9,26 @@ export const GAME_TYPES = {
   choosePaint: 2
 };
 
+export const ANSWER_TYPES = {
+  wrong: `wrong`,
+  correct: `correct`,
+  slow: `slow`,
+  fast: `fast`,
+  unknown: `unknown`
+};
+
 export const QUEST_DATA = [
   {
     task: `Угадайте для каждого изображения фото или рисунок?`,
     type: GAME_TYPES.chooseTwoAnswers,
     answers: [
       {
-        img: {
-          src: `http://placehold.it/468x458`,
-          width: `468`,
-          height: `458`
-        },
-        type: IMAGE_TYPES.photo
+        imgSrc: `http://i.imgur.com/1KegWPz.jpg`,
+        imgType: IMAGE_TYPES.photo
       },
       {
-        img: {
-          src: `http://placehold.it/468x458`,
-          width: `468`,
-          height: `458`
-        },
-        type: IMAGE_TYPES.photo
+        imgSrc: `https://k42.kn3.net/D2F0370D6.jpg`,
+        imgType: IMAGE_TYPES.paint
       }
     ]
   },
@@ -37,12 +37,8 @@ export const QUEST_DATA = [
     type: GAME_TYPES.chooseOneAnswer,
     answers: [
       {
-        img: {
-          src: `http://placehold.it/705x455`,
-          width: `705`,
-          height: `455`
-        },
-        type: IMAGE_TYPES.photo
+        imgSrc: `https://k42.kn3.net/CF42609C8.jpg`,
+        imgType: IMAGE_TYPES.paint
       }
     ]
   },
@@ -51,28 +47,114 @@ export const QUEST_DATA = [
     type: GAME_TYPES.choosePaint,
     answers: [
       {
-        img: {
-          src: `http://placehold.it/304x455`,
-          width: `304`,
-          height: `455`
-        },
-        type: IMAGE_TYPES.photo
+        imgSrc: `http://i.imgur.com/DKR1HtB.jpg`,
+        imgType: IMAGE_TYPES.photo
       },
       {
-        img: {
-          src: `http://placehold.it/304x455`,
-          width: `304`,
-          height: `455`
-        },
-        type: IMAGE_TYPES.photo
+        imgSrc: `https://i.imgur.com/DiHM5Zb.jpg`,
+        imgType: IMAGE_TYPES.photo
       },
       {
-        img: {
-          src: `http://placehold.it/304x455`,
-          width: `304`,
-          height: `455`
-        },
-        type: IMAGE_TYPES.paint
+        imgSrc: `https://k32.kn3.net/5C7060EC5.jpg`,
+        imgType: IMAGE_TYPES.paint
+      }
+    ]
+  },
+  {
+    task: `Угадайте для каждого изображения фото или рисунок?`,
+    type: GAME_TYPES.chooseTwoAnswers,
+    answers: [
+      {
+        imgSrc: `http://i.imgur.com/1KegWPz.jpg`,
+        imgType: IMAGE_TYPES.photo
+      },
+      {
+        imgSrc: `https://k42.kn3.net/D2F0370D6.jpg`,
+        imgType: IMAGE_TYPES.paint
+      }
+    ]
+  },
+  {
+    task: `Угадай, фото или рисунок?`,
+    type: GAME_TYPES.chooseOneAnswer,
+    answers: [
+      {
+        imgSrc: `https://k42.kn3.net/CF42609C8.jpg`,
+        imgType: IMAGE_TYPES.paint
+      }
+    ]
+  },
+  {
+    task: `Найдите рисунок среди изображений`,
+    type: GAME_TYPES.choosePaint,
+    answers: [
+      {
+        imgSrc: `http://i.imgur.com/DKR1HtB.jpg`,
+        imgType: IMAGE_TYPES.photo
+      },
+      {
+        imgSrc: `https://i.imgur.com/DiHM5Zb.jpg`,
+        imgType: IMAGE_TYPES.photo
+      },
+      {
+        imgSrc: `https://k32.kn3.net/5C7060EC5.jpg`,
+        imgType: IMAGE_TYPES.paint
+      }
+    ]
+  },
+  {
+    task: `Угадайте для каждого изображения фото или рисунок?`,
+    type: GAME_TYPES.chooseTwoAnswers,
+    answers: [
+      {
+        imgSrc: `http://i.imgur.com/1KegWPz.jpg`,
+        imgType: IMAGE_TYPES.photo
+      },
+      {
+        imgSrc: `https://k42.kn3.net/D2F0370D6.jpg`,
+        imgType: IMAGE_TYPES.paint
+      }
+    ]
+  },
+  {
+    task: `Угадай, фото или рисунок?`,
+    type: GAME_TYPES.chooseOneAnswer,
+    answers: [
+      {
+        imgSrc: `https://k42.kn3.net/CF42609C8.jpg`,
+        imgType: IMAGE_TYPES.paint
+      }
+    ]
+  },
+  {
+    task: `Найдите рисунок среди изображений`,
+    type: GAME_TYPES.choosePaint,
+    answers: [
+      {
+        imgSrc: `http://i.imgur.com/DKR1HtB.jpg`,
+        imgType: IMAGE_TYPES.photo
+      },
+      {
+        imgSrc: `https://i.imgur.com/DiHM5Zb.jpg`,
+        imgType: IMAGE_TYPES.photo
+      },
+      {
+        imgSrc: `https://k32.kn3.net/5C7060EC5.jpg`,
+        imgType: IMAGE_TYPES.paint
+      }
+    ]
+  },
+  {
+    task: `Угадайте для каждого изображения фото или рисунок?`,
+    type: GAME_TYPES.chooseTwoAnswers,
+    answers: [
+      {
+        imgSrc: `http://i.imgur.com/1KegWPz.jpg`,
+        imgType: IMAGE_TYPES.photo
+      },
+      {
+        imgSrc: `https://k42.kn3.net/D2F0370D6.jpg`,
+        imgType: IMAGE_TYPES.paint
       }
     ]
   }

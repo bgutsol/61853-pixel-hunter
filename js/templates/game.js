@@ -1,10 +1,10 @@
 import {INITIAL_STATE, updateState} from '../data/quest';
-import {QUEST_DATA, GAME_TYPES, IMAGE_TYPES} from '../data/quest-data';
+import {QUEST_DATA, GAME_TYPES, IMAGE_TYPES, ANSWER_TYPES} from '../data/quest-data';
 import {createElement, changeView} from '../util';
 import getFooter from './footer';
 import getLevel from './level';
 import getHeader from './header';
-import stats from './stats';
+import getTotalStats from './total-stats';
 
 const setHandlerTwoAnswers = (template, [answer1, answer2], callback) => {
   const inputs = template.querySelectorAll(`input[type=radio]`);
@@ -13,8 +13,8 @@ const setHandlerTwoAnswers = (template, [answer1, answer2], callback) => {
     const input = e.target;
     inputsByName[input.name] = input.value;
 
-    if (inputsByName.question1 && inputsByName.question2) {
-      callback(inputsByName.question1 === answer1.type && inputsByName.question2 === answer2.type);
+    if (inputsByName.question0 && inputsByName.question1) {
+      callback(inputsByName.question0 === answer1.imgType && inputsByName.question1 === answer2.imgType);
     }
   };
 
@@ -28,7 +28,7 @@ const setHandlerOneAnswer = (template, [answer], callback) => {
   const handleInputChange = function (e) {
     const input = e.target;
 
-    callback(input.value === answer.type);
+    callback(input.value === answer.imgType);
   };
 
   for (let i = 0; i < inputs.length; i++) {
@@ -41,7 +41,7 @@ const setHandlerChoosePaint = (template, answers, callback) => {
   const handleOptionClick = (e) => {
     const target = e.target;
     const targetOptionIndex = parseInt(target.getAttribute(`data-index`), 10);
-    const correctAnswerIndex = answers.findIndex((answer) => answer.type === IMAGE_TYPES.paint);
+    const correctAnswerIndex = answers.findIndex((answer) => answer.imgType === IMAGE_TYPES.paint);
 
     callback(targetOptionIndex === correctAnswerIndex);
   };
@@ -65,7 +65,7 @@ const setEventsHandler = (template, data, callback) => {
   }
 };
 
-const changeLevel = (state = INITIAL_STATE, answers = []) => {
+const changeLevel = (state = INITIAL_STATE, answers = [], gameStats = []) => {
   const gameContainer = createElement();
   const currentLevelData = QUEST_DATA[state.level];
 
@@ -79,24 +79,25 @@ const changeLevel = (state = INITIAL_STATE, answers = []) => {
       time: 15
     });
 
+    if (answerType) {
+      gameStats.push(ANSWER_TYPES.correct);
+    } else {
+      gameStats.push(ANSWER_TYPES.wrong);
+    }
+
     if (!answerType) {
       newState.lives = state.lives - 1;
     }
 
-    if (newState.lives === 0) {
-      changeView(stats);
+    if (state.level === QUEST_DATA.length - 1 || newState.lives === 0) {
+      changeView(getTotalStats(state, answers, gameStats));
       return;
     }
 
-    if (state.level === QUEST_DATA.length - 1) {
-      changeView(stats);
-      return;
-    }
-
-    changeView(changeLevel(updateState(state, newState), answers));
+    changeView(changeLevel(updateState(state, newState), answers, gameStats));
   };
 
-  const levelElement = getLevel(currentLevelData);
+  const levelElement = getLevel(currentLevelData, gameStats);
   setEventsHandler(levelElement, currentLevelData, handleAnswer);
 
   gameContainer.appendChild(getHeader(state));
