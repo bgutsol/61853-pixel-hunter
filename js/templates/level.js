@@ -19,7 +19,7 @@ const getOptionFormElemHtml = (type, number) => {
 const getOptionHtml = (answer, number, type) => {
   const optionFormElemHtml = getOptionFormElemHtml(type, number);
 
-  return `<div class="game__option">
+  return `<div class="game__option" data-index="${number}">
   <img src="${answer.img.src}"
     alt="Option ${number}"
     width="${answer.img.width}"

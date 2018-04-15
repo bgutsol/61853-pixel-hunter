@@ -1,20 +1,20 @@
 import {INITIAL_STATE, updateState} from '../data/quest';
-import {QUEST_DATA, GAME_TYPES} from '../data/quest-data';
+import {QUEST_DATA, GAME_TYPES, IMAGE_TYPES} from '../data/quest-data';
 import {createElement, changeView} from '../util';
 import getFooter from './footer';
 import getLevel from './level';
 import getHeader from './header';
 import stats from './stats';
 
-const setHandlerTwoAnswers = (template, callback) => {
+const setHandlerTwoAnswers = (template, [answer1, answer2], callback) => {
   const inputs = template.querySelectorAll(`input[type=radio]`);
   const inputsByName = {};
   const handleInputChange = function (e) {
     const input = e.target;
-    inputsByName[input.name] = input.checked;
+    inputsByName[input.name] = input.value;
 
     if (inputsByName.question1 && inputsByName.question2) {
-      callback(true);
+      callback(inputsByName.question1 === answer1.type && inputsByName.question2 === answer2.type);
     }
   };
 
@@ -23,12 +23,12 @@ const setHandlerTwoAnswers = (template, callback) => {
   }
 };
 
-const setHandlerOneAnswer = (template, callback) => {
+const setHandlerOneAnswer = (template, [answer], callback) => {
   const inputs = template.querySelectorAll(`input[type=radio]`);
   const handleInputChange = function (e) {
     const input = e.target;
 
-    callback(true);
+    callback(input.value === answer.type);
   };
 
   for (let i = 0; i < inputs.length; i++) {
@@ -36,33 +36,33 @@ const setHandlerOneAnswer = (template, callback) => {
   }
 };
 
-const setHandlerChoosePaint = (template, callback) => {
-  const answers = template.querySelectorAll(`.game__option`);
-  const handleAnswerClick = (e) => {
+const setHandlerChoosePaint = (template, answers, callback) => {
+  const options = template.querySelectorAll(`.game__option`);
+  const handleOptionClick = (e) => {
     const target = e.target;
+    const targetOptionIndex = parseInt(target.getAttribute(`data-index`), 10);
+    const correctAnswerIndex = answers.findIndex((answer) => answer.type === IMAGE_TYPES.paint);
 
-    callback(true);
+    callback(targetOptionIndex === correctAnswerIndex);
   };
 
-  for (let i = 0; i < answers.length; i++) {
-    answers[i].addEventListener(`click`, handleAnswerClick);
+  for (let i = 0; i < options.length; i++) {
+    options[i].addEventListener(`click`, handleOptionClick);
   }
 };
 
-const setEventsHandler = (template, type, callback) => {
-
-  switch (type) {
+const setEventsHandler = (template, data, callback) => {
+  switch (data.type) {
     case GAME_TYPES.chooseTwoAnswers:
-      setHandlerTwoAnswers(template, callback);
+      setHandlerTwoAnswers(template, data.answers, callback);
       break;
     case GAME_TYPES.chooseOneAnswer:
-      setHandlerOneAnswer(template, callback);
+      setHandlerOneAnswer(template, data.answers, callback);
       break;
     case GAME_TYPES.choosePaint:
-      setHandlerChoosePaint(template, callback);
+      setHandlerChoosePaint(template, data.answers, callback);
       break;
   }
-
 };
 
 const changeLevel = (state = INITIAL_STATE, answers = []) => {
@@ -97,7 +97,7 @@ const changeLevel = (state = INITIAL_STATE, answers = []) => {
   };
 
   const levelElement = getLevel(currentLevelData);
-  setEventsHandler(levelElement, currentLevelData.type, handleAnswer);
+  setEventsHandler(levelElement, currentLevelData, handleAnswer);
 
   gameContainer.appendChild(getHeader(state));
   gameContainer.appendChild(levelElement);

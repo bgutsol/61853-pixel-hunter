@@ -1,6 +1,6 @@
 export const IMAGE_TYPES = {
-  photo: 0,
-  paint: 1
+  photo: `photo`,
+  paint: `paint`
 };
 
 export const GAME_TYPES = {
