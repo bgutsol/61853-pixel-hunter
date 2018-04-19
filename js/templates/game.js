@@ -70,9 +70,7 @@ const changeLevel = (state = INITIAL_STATE, answers = [], gameStats = []) => {
   const currentLevelData = QUEST_DATA[state.level];
 
   const handleAnswer = (answerType) => {
-    const newState = {
-      level: state.level + 1
-    };
+    let newState = updateState(state, {level: state.level + 1});
 
     answers.push({
       isCorrect: answerType,
@@ -86,15 +84,15 @@ const changeLevel = (state = INITIAL_STATE, answers = [], gameStats = []) => {
     }
 
     if (!answerType) {
-      newState.lives = state.lives - 1;
+      newState = updateState(newState, {lives: state.lives - 1});
     }
 
-    if (state.level === QUEST_DATA.length - 1 || newState.lives === 0) {
+    if (newState.level === QUEST_DATA.length || newState.lives === 0) {
       changeView(getTotalStats(state, answers, gameStats));
       return;
     }
 
-    changeView(changeLevel(updateState(state, newState), answers, gameStats));
+    changeView(changeLevel(newState, answers, gameStats));
   };
 
   const levelElement = getLevel(currentLevelData, gameStats);
