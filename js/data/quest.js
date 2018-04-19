@@ -1,3 +1,13 @@
+export const INITIAL_STATE = {
+  level: 0,
+  lives: 3,
+  time: 0
+};
+
+export const updateState = (oldState, newState) => {
+  return Object.assign({}, oldState, newState);
+};
+
 export const calculateResult = (userAnswers, remainingLives) => {
   // check arguments types
   if (!Array.isArray(userAnswers)) {

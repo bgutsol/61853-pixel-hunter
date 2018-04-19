@@ -1,4 +1,4 @@
 import {changeView} from './util';
-import intro from './templates/intro';
+import getIntro from './templates/intro';
 
-changeView(intro);
+changeView(getIntro());
