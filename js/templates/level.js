@@ -1,5 +1,5 @@
 import {createElement} from '../util';
-import {GAME_TYPES, ANSWER_TYPES} from '../data/quest-data';
+import {GAME_TYPES} from '../data/quest-data';
 import getStatsListHtml from './stats-list';
 
 const getOptionFormInputsHtml = (number) => {
