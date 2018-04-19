@@ -1,3 +1,9 @@
+const QUESTION_TYPES = {
+  chooseTwoAnswers: `Угадайте для каждого изображения фото или рисунок?`,
+  chooseOneAnswer: `Угадай, фото или рисунок?`,
+  choosePaint: `Найдите рисунок среди изображений`
+};
+
 export const IMAGE_TYPES = {
   photo: `photo`,
   paint: `paint`
@@ -19,7 +25,7 @@ export const ANSWER_TYPES = {
 
 export const QUEST_DATA = [
   {
-    task: `Угадайте для каждого изображения фото или рисунок?`,
+    task: QUESTION_TYPES.chooseTwoAnswers,
     type: GAME_TYPES.chooseTwoAnswers,
     answers: [
       {
@@ -33,7 +39,7 @@ export const QUEST_DATA = [
     ]
   },
   {
-    task: `Угадай, фото или рисунок?`,
+    task: QUESTION_TYPES.chooseOneAnswer,
     type: GAME_TYPES.chooseOneAnswer,
     answers: [
       {
@@ -43,7 +49,7 @@ export const QUEST_DATA = [
     ]
   },
   {
-    task: `Найдите рисунок среди изображений`,
+    task: QUESTION_TYPES.choosePaint,
     type: GAME_TYPES.choosePaint,
     answers: [
       {
@@ -61,7 +67,7 @@ export const QUEST_DATA = [
     ]
   },
   {
-    task: `Угадайте для каждого изображения фото или рисунок?`,
+    task: QUESTION_TYPES.chooseTwoAnswers,
     type: GAME_TYPES.chooseTwoAnswers,
     answers: [
       {
@@ -75,7 +81,7 @@ export const QUEST_DATA = [
     ]
   },
   {
-    task: `Угадай, фото или рисунок?`,
+    task: QUESTION_TYPES.chooseOneAnswer,
     type: GAME_TYPES.chooseOneAnswer,
     answers: [
       {
@@ -85,7 +91,7 @@ export const QUEST_DATA = [
     ]
   },
   {
-    task: `Найдите рисунок среди изображений`,
+    task: QUESTION_TYPES.choosePaint,
     type: GAME_TYPES.choosePaint,
     answers: [
       {
@@ -103,7 +109,7 @@ export const QUEST_DATA = [
     ]
   },
   {
-    task: `Угадайте для каждого изображения фото или рисунок?`,
+    task: QUESTION_TYPES.chooseTwoAnswers,
     type: GAME_TYPES.chooseTwoAnswers,
     answers: [
       {
@@ -117,7 +123,7 @@ export const QUEST_DATA = [
     ]
   },
   {
-    task: `Угадай, фото или рисунок?`,
+    task: QUESTION_TYPES.chooseOneAnswer,
     type: GAME_TYPES.chooseOneAnswer,
     answers: [
       {
@@ -127,7 +133,7 @@ export const QUEST_DATA = [
     ]
   },
   {
-    task: `Найдите рисунок среди изображений`,
+    task: QUESTION_TYPES.choosePaint,
     type: GAME_TYPES.choosePaint,
     answers: [
       {
@@ -145,7 +151,7 @@ export const QUEST_DATA = [
     ]
   },
   {
-    task: `Угадайте для каждого изображения фото или рисунок?`,
+    task: QUESTION_TYPES.chooseTwoAnswers,
     type: GAME_TYPES.chooseTwoAnswers,
     answers: [
       {
