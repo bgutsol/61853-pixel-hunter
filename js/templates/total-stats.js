@@ -1,10 +1,14 @@
-import {createElement, changeView} from '../util';
+import {ANSWER_TYPES} from '../data/quest-data';
+import {createElement} from '../util';
 import {calculateResult} from '../data/quest';
 import getHeader from './header';
 import getFooter from './footer';
 import getStatsListHtml from './stats-list';
 
 export default (state, answers, gameStats) => {
+  const correctAnswersLength = answers.filter((answer) => answer.isCorrect).length;
+  const fastAnswersLength = gameStats.filter((mod) => mod === ANSWER_TYPES.fast).length;
+  const slowAnswersLength = gameStats.filter((mod) => mod === ANSWER_TYPES.slow).length;
   let resultTable = ``;
 
   if (answers.length < 10) {
@@ -29,28 +33,28 @@ export default (state, answers, gameStats) => {
           ${getStatsListHtml(gameStats)}
         </td>
         <td class="result__points">×&nbsp;100</td>
-        <td class="result__total">900</td>
+        <td class="result__total">${correctAnswersLength}</td>
       </tr>
       <tr>
         <td></td>
         <td class="result__extra">Бонус за скорость:</td>
-        <td class="result__extra">1&nbsp;<span class="stats__result stats__result--fast"></span></td>
+        <td class="result__extra">${fastAnswersLength}&nbsp;<span class="stats__result stats__result--fast"></span></td>
         <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">50</td>
+        <td class="result__total">${fastAnswersLength * 50}</td>
       </tr>
       <tr>
         <td></td>
         <td class="result__extra">Бонус за жизни:</td>
-        <td class="result__extra">2&nbsp;<span class="stats__result stats__result--alive"></span></td>
+        <td class="result__extra">${state.lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
         <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">100</td>
+        <td class="result__total">${state.lives * 50}</td>
       </tr>
       <tr>
         <td></td>
         <td class="result__extra">Штраф за медлительность:</td>
-        <td class="result__extra">2&nbsp;<span class="stats__result stats__result--slow"></span></td>
+        <td class="result__extra">${slowAnswersLength}&nbsp;<span class="stats__result stats__result--slow"></span></td>
         <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">-100</td>
+        <td class="result__total">-${slowAnswersLength * 50}</td>
       </tr>
       <tr>
         <td colspan="5" class="result__total  result__total--final">${totalResult}</td>
