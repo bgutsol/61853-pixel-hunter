@@ -3,7 +3,7 @@ import {QUEST_DATA, GAME_TYPES, IMAGE_TYPES, ANSWER_TYPES} from '../data/quest-d
 import {createElement, changeView} from '../util';
 import getFooter from './footer';
 import getLevel from './level';
-import getHeader from './header';
+import HeaderView from './header-view';
 import getTotalStats from './total-stats';
 
 const setHandlerTwoAnswers = (template, [answer1, answer2], callback) => {
@@ -98,7 +98,8 @@ const changeLevel = (state = INITIAL_STATE, answers = [], gameStats = []) => {
   const levelElement = getLevel(currentLevelData, gameStats);
   setEventsHandler(levelElement, currentLevelData, handleAnswer);
 
-  gameContainer.appendChild(getHeader(state));
+  const header = new HeaderView(state);
+  gameContainer.appendChild(header.element);
   gameContainer.appendChild(levelElement);
   gameContainer.appendChild(getFooter());
 
