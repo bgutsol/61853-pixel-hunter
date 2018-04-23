@@ -23,7 +23,7 @@ const drawTimer = (time) => {
 };
 
 export default class HeaderView extends AbstractView {
-  constructor(state) {
+  constructor(state = {}) {
     super();
     this.state = state;
   }
