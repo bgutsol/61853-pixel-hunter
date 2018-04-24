@@ -27,7 +27,7 @@ export default class TotalStatsView extends AbstractView {
       <tr>
         <td class="result__number">1.</td>
         <td>
-          ${statsList.element}
+          ${statsList.template}
         </td>
         <td class="result__total"></td>
         <td class="result__total  result__total--final">fail</td>
@@ -41,7 +41,7 @@ export default class TotalStatsView extends AbstractView {
       <tr>
         <td class="result__number">1.</td>
         <td colspan="2">
-          ${statsList.element}
+          ${statsList.template}
         </td>
         <td class="result__points">×&nbsp;100</td>
         <td class="result__total">${correctAnswersLength}</td>

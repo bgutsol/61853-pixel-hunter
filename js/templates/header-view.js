@@ -1,31 +1,10 @@
 import AbstractView from '../abstract-view';
 
-const MAX_LIVES = 3;
-
-const drawLives = (lives) => {
-  if (typeof lives === `undefined`) {
-    return ``;
-  }
-  const emptyLives = new Array(MAX_LIVES - lives).fill(`empty`);
-  const fullLives = new Array(lives).fill(`full`);
-  const livesImgHtml = [...emptyLives, ...fullLives].map((mod) => {
-    return `<img src="img/heart__${mod}.svg" class="game__heart" alt="Life" width="32" height="32">`;
-  }).join(``);
-
-  return `<div class="game__lives">${livesImgHtml}</div>`;
-};
-
-const drawTimer = (time) => {
-  if (typeof time === `undefined`) {
-    return ``;
-  }
-  return `<h1 class="game__timer">${time}</h1>`;
-};
-
 export default class HeaderView extends AbstractView {
-  constructor(state = {}) {
+  constructor(time, livesMods) {
     super();
-    this.state = state;
+    this.time = time;
+    this.livesMods = livesMods;
   }
 
   get template() {
@@ -36,9 +15,25 @@ export default class HeaderView extends AbstractView {
         <img src="img/logo_small.svg" width="101" height="44">
       </button>
     </div>
-    ${drawTimer(this.state.time)}
-    ${drawLives(this.state.lives)}
-  </header>`;
+    ${this.timeHtml}
+    ${this.livesHtml}
+    </header>`;
+  }
+
+  get timeHtml() {
+    if (typeof this.time === `undefined`) {
+      return ``;
+    }
+    return `<h1 class="game__timer">${this.time}</h1>`;
+  }
+
+  get livesHtml() {
+    if (!this.livesMods) {
+      return ``;
+    }
+    return this.livesMods.map((mod) => {
+      return `<img src="img/heart__${mod}.svg" class="game__heart" alt="Life" width="32" height="32">`;
+    }).join(``);
   }
 
   onBtnBackClick() {}
