@@ -11,4 +11,9 @@ const changeView = (template) => {
   main.appendChild(template);
 };
 
-export {createElement, changeView};
+const updateView = (template, element) => {
+  template.innerHTML = ``;
+  template.appendChild(element);
+};
+
+export {createElement, changeView, updateView};
