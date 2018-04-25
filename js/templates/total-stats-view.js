@@ -4,26 +4,13 @@ import {ANSWER_TYPES} from '../data/quest-data';
 import {calculateResult} from '../data/quest';
 
 export default class TotalStatsView extends AbstractView {
-  constructor(state, answers, gameStats) {
-    super();
 
-    this.state = state;
-    this.answers = answers;
-    this.gameStats = gameStats;
-  }
+  static getHtml(state, answers, gameStats) {
+    const statsList = new StatsListView(gameStats);
+    let tableHtml = ``;
 
-  get template() {
-    return `<div class="result">${this.tableHtml}</div>`;
-  }
-
-  get tableHtml() {
-    const correctAnswersLength = this.answers.filter((answer) => answer.isCorrect).length;
-    const fastAnswersLength = this.gameStats.filter((mod) => mod === ANSWER_TYPES.fast).length;
-    const slowAnswersLength = this.gameStats.filter((mod) => mod === ANSWER_TYPES.slow).length;
-    const statsList = new StatsListView(this.gameStats);
-
-    if (this.answers.length < 10) {
-      return `<table class="result__table">
+    if (answers.length < 10) {
+      tableHtml = `<table class="result__table">
       <tr>
         <td class="result__number">1.</td>
         <td>
@@ -33,10 +20,14 @@ export default class TotalStatsView extends AbstractView {
         <td class="result__total  result__total--final">fail</td>
       </tr>
     </table>`;
-    }
+    } else {
 
-    const totalResult = calculateResult(this.answers, this.state.lives);
-    return `<h1>Победа!</h1>
+      const correctAnswersLength = answers.filter((answer) => answer.isCorrect).length;
+      const fastAnswersLength = gameStats.filter((mod) => mod === ANSWER_TYPES.fast).length;
+      const slowAnswersLength = gameStats.filter((mod) => mod === ANSWER_TYPES.slow).length;
+      const totalResult = calculateResult(answers, state.lives);
+
+      tableHtml = `<h1>Победа!</h1>
     <table class="result__table">
       <tr>
         <td class="result__number">1.</td>
@@ -56,9 +47,9 @@ export default class TotalStatsView extends AbstractView {
       <tr>
         <td></td>
         <td class="result__extra">Бонус за жизни:</td>
-        <td class="result__extra">${this.state.lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
+        <td class="result__extra">${state.lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
         <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">${this.state.lives * 50}</td>
+        <td class="result__total">${state.lives * 50}</td>
       </tr>
       <tr>
         <td></td>
@@ -71,5 +62,8 @@ export default class TotalStatsView extends AbstractView {
         <td colspan="5" class="result__total  result__total--final">${totalResult}</td>
       </tr>
     </table>`;
+    }
+
+    return `<div class="result">${tableHtml}</div>`;
   }
 }
