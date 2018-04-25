@@ -31,9 +31,11 @@ export default class HeaderView extends AbstractView {
     if (!this.livesMods) {
       return ``;
     }
-    return this.livesMods.map((mod) => {
+
+    const livesImgs = this.livesMods.map((mod) => {
       return `<img src="img/heart__${mod}.svg" class="game__heart" alt="Life" width="32" height="32">`;
     }).join(``);
+    return `<div class="game__lives">${livesImgs}</div>`;
   }
 
   onBtnBackClick() {}
