@@ -2,7 +2,7 @@ import {createElement, changeView} from '../util';
 import getHeader from './header';
 import FooterView from './footer-view';
 import RulesView from './rules-view';
-import getGame from './game';
+import getGame from './game/game';
 
 export default () => {
 

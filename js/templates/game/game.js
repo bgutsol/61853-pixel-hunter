@@ -1,10 +1,12 @@
-import {INITIAL_STATE, updateState} from '../data/quest';
-import {QUEST_DATA, GAME_TYPES, ANSWER_TYPES} from '../data/quest-data';
-import {createElement, changeView} from '../util';
-import FooterView from './footer-view';
-import getHeader from './header';
-import getTotalStats from './total-stats';
-import {LevelTwoAnswersView, LevelOneAnswerView, LevelChoosePaintView} from './level-view';
+import {INITIAL_STATE, updateState} from '../../data/quest';
+import {QUEST_DATA, GAME_TYPES, ANSWER_TYPES} from '../../data/quest-data';
+import {createElement, changeView} from '../../util';
+import FooterView from '.././footer-view';
+import getHeader from '.././header';
+import getTotalStats from '.././total-stats';
+import LevelTwoAnswersView from './level-two-answer-view';
+import LevelOneAnswerView from './level-one-answer-view';
+import LevelChoosePaintView from './level-choose-paint-view';
 
 
 const getLevel = (data, stats = []) => {
