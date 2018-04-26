@@ -1,5 +1,6 @@
 import AbstractView from '../../abstract-view';
 import StatsListView from '../stats-list-view';
+import fitSize from '../helpers/fit-size';
 
 const drawOptionFormInputs = (number) => {
   return `<label class="game__answer game__answer--photo">
@@ -12,19 +13,28 @@ const drawOptionFormInputs = (number) => {
       </label>`;
 };
 
-const drawOption = (imgSrc, imgSize, number, withFormInputs) => {
-  let optionFormInputsHtml = ``;
-  if (withFormInputs) {
-    optionFormInputsHtml = drawOptionFormInputs(number);
-  }
+const bindOptionImage = (e) => {
+  const image = e.target;
+  const imageSize = {
+    width: image.width,
+    height: image.height
+  };
+  const imgParent = image.parentElement;
+  const frameSize = {
+    width: imgParent.clientWidth,
+    height: imgParent.clientHeight
+  };
+  const fitedImgSize = fitSize(frameSize, imageSize);
+  image.width = fitedImgSize.width;
+  image.height = fitedImgSize.height;
+};
 
-  return `<div class="game__option" data-index="${number}">
-  <img src="${imgSrc}"
-    alt="Option ${number}"
-    width="${imgSize.width}"
-    height="${imgSize.height}">
-  ${optionFormInputsHtml}
-  </div>`;
+const getOptionImage = (answer) => {
+  const img = new Image();
+
+  img.src = answer.imgSrc;
+  img.addEventListener(`load`, bindOptionImage);
+  return img;
 };
 
 export default class LevelView extends AbstractView {
@@ -51,11 +61,33 @@ export default class LevelView extends AbstractView {
   </div>`;
   }
 
-  get contentHtml() {
-    return `<form class="game__content ${this._contentClass}">${this.optionsHtml}</form>`;
+  get element() {
+    if (!this._element) {
+      this._element = this.render();
+      this.addOptions();
+      this.bind(this._element);
+    }
+    return this._element;
   }
 
-  get optionsHtml() {
-    return this.data.answers.map((answer, index) => drawOption(answer.imgSrc, this._imgSize, index, this._hasFormInputs)).join(``);
+  addOptions() {
+    const wrapperElement = this.element.querySelector(`.game__content`);
+
+    this.data.answers.map((answer, index) => {
+      const option = document.createElement(`div`);
+      option.className = `game__option`;
+      option.setAttribute(`data-index`, index);
+      option.appendChild(getOptionImage(answer));
+
+      if (this._hasFormInputs) {
+        option.insertAdjacentHTML(`beforeend`, drawOptionFormInputs(index));
+      }
+
+      wrapperElement.appendChild(option);
+    });
+  }
+
+  get contentHtml() {
+    return `<form class="game__content ${this._contentClass}"></form>`;
   }
 }
