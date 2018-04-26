@@ -7,10 +7,6 @@ export default class LevelChoosePaintView extends LevelView {
 
     this._contentClass = `game__content--triple`;
     this._hasFormInputs = false;
-    this._imgSize = {
-      width: 304,
-      height: 455
-    };
   }
 
   bind() {

@@ -45,7 +45,6 @@ export default class LevelView extends AbstractView {
     this.stats = stats;
     this._contentClass = ``;
     this._hasFormInputs = true;
-    this._imgSize = {};
   }
 
   get template() {

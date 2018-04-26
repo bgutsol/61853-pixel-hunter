@@ -1,15 +1,6 @@
 import LevelView from './level-view.js';
 
 export default class LevelTwoAnswersView extends LevelView {
-  constructor(data, stats) {
-    super(data, stats);
-
-    this._imgSize = {
-      width: 468,
-      height: 458
-    };
-  }
-
   bind() {
     const inputs = this.element.querySelectorAll(`input[type=radio]`);
     const inputsByName = {};
