@@ -1,9 +1,9 @@
 import {assert} from 'chai';
-import fitSize from './fit-size';
+import fitImgSize from './fit-image-size';
 
 const createTestForFrame = (frame) => {
   const assertRatio = (given, expected) => {
-    const actual = fitSize(frame, given);
+    const actual = fitImgSize(frame, given);
     assert.deepEqual(actual, expected);
   };
 

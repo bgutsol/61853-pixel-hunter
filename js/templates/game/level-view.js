@@ -1,6 +1,6 @@
 import AbstractView from '../../abstract-view';
 import StatsListView from '../stats-list-view';
-import fitSize from '../helpers/fit-size';
+import fitImgSize from '../helpers/fit-image-size';
 
 const drawOptionFormInputs = (number) => {
   return `<label class="game__answer game__answer--photo">
@@ -13,7 +13,7 @@ const drawOptionFormInputs = (number) => {
       </label>`;
 };
 
-const bindOptionImage = (e) => {
+const imageLoadHandler = (e) => {
   const image = e.target;
   const imageSize = {
     width: image.width,
@@ -24,17 +24,19 @@ const bindOptionImage = (e) => {
     width: imgParent.clientWidth,
     height: imgParent.clientHeight
   };
-  const fitedImgSize = fitSize(frameSize, imageSize);
+  const fitedImgSize = fitImgSize(frameSize, imageSize);
   image.width = fitedImgSize.width;
   image.height = fitedImgSize.height;
+  image.style.display = ``;
 };
 
 const getOptionImage = (answer) => {
-  const img = new Image();
+  const image = new Image();
 
-  img.src = answer.imgSrc;
-  img.addEventListener(`load`, bindOptionImage);
-  return img;
+  image.src = answer.imgSrc;
+  image.style.display = `none`;
+  image.addEventListener(`load`, imageLoadHandler);
+  return image;
 };
 
 export default class LevelView extends AbstractView {
