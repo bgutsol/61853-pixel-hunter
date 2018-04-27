@@ -5,10 +5,6 @@ export default class LevelOneAnswerView extends LevelView {
     super(data, stats);
 
     this._contentClass = `game__content--wide`;
-    this._imgSize = {
-      width: 705,
-      height: 455
-    };
   }
 
   bind() {
