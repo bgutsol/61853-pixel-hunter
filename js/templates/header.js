@@ -25,5 +25,5 @@ export default (state) => {
     changeView(getGreeting());
   };
 
-  return header.element;
+  return header;
 };

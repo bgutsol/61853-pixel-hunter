@@ -1,8 +1,8 @@
-import {createElement, changeView} from '../util';
+import {createElement} from '../util';
 import getHeader from './header';
 import FooterView from './footer-view';
 import RulesView from './rules-view';
-import getGame from './game/game';
+import Application from '../application';
 
 export default () => {
 
@@ -15,11 +15,11 @@ export default () => {
     rules.btnSubmit.disabled = !value;
   };
 
-  rules.onSubmit = () => {
-    changeView(getGame());
+  rules.onSubmit = (userName) => {
+    Application.showGame(userName);
   };
 
-  mainContainer.appendChild(header);
+  mainContainer.appendChild(header.element);
   mainContainer.appendChild(rules.element);
   mainContainer.appendChild(footer.element);
 

@@ -1,7 +1,7 @@
-import {changeView, createElement} from '../util';
+import {createElement} from '../util';
 import FooterView from './footer-view';
 import GreetingView from './greeting-view';
-import getRules from './rules';
+import Application from '../application';
 
 
 export default () => {
@@ -10,7 +10,7 @@ export default () => {
   const footer = new FooterView();
 
   greeting.onBtnContinueClick = () => {
-    changeView(getRules());
+    Application.showRules();
   };
 
   mainContainer.appendChild(greeting.element);

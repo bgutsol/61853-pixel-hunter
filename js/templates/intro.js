@@ -1,13 +1,13 @@
-import {createElement, changeView} from '../util';
+import {createElement} from '../util';
 import IntroView from './intro-view';
-import getGreeting from './greeting';
+import Application from '../application';
 
 export default () => {
   const mainContainer = createElement();
   const intro = new IntroView();
 
   intro.onBtnContinueClick = () => {
-    changeView(getGreeting());
+    Application.showGreeting();
   };
 
   mainContainer.appendChild(intro.element);

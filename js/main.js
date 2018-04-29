@@ -1,4 +1,4 @@
 import {changeView} from './util';
-import getIntro from './templates/intro';
+import Application from './application';
 
-changeView(getIntro());
+Application.showIntro();
