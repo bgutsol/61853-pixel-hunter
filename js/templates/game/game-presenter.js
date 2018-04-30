@@ -79,7 +79,8 @@ class GamePresenter {
   }
 
   return() {
-    const isAnswerPositive = confirm(`Are you sure? Your game progress will be lost.`);
+    // const isAnswerPositive = confirm(`Are you sure? Your game progress will be lost.`);
+    const isAnswerPositive = true;
     if (isAnswerPositive) {
       Application.showGreeting();
     }
