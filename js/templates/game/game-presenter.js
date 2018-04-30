@@ -1,7 +1,7 @@
 import {GAME_TYPES, ANSWER_TYPES} from '../../data/quest-data';
 import Application from '../../application';
 import Header from '../header/header-presenter';
-import FooterView from '../footer/footer-view';
+import Footer from '../components/footer-view';
 import LevelTwoAnswersView from './level-two-answer-view';
 import LevelOneAnswerView from './level-one-answer-view';
 import LevelChoosePaintView from './level-choose-paint-view';
@@ -12,7 +12,7 @@ class GamePresenter {
 
     this.header = new Header(this.model.state);
     this.content = this.createLevel();
-    this.footer = new FooterView();
+    this.footer = new Footer();
 
     this.root = document.createElement(`div`);
     this.root.appendChild(this.header.element);

@@ -1,6 +1,6 @@
 import Application from '../../application';
 import Header from '../header/header-presenter';
-import Footer from '../footer/footer-view';
+import Footer from '../components/footer-view';
 import ResultsView from './results-view';
 import {TOTAL_RESULT_TYPES} from '../../data/quest-data';
 import {calculateResult} from '../../data/quest';

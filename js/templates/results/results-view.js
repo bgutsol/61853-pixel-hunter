@@ -1,5 +1,5 @@
 import AbstractView from '../abstract-view';
-import StatsListView from '../stats-list-view';
+import StatsListView from '../components/stats-list-view';
 import {ANSWER_TYPES, TOTAL_RESULT_TYPES} from '../../data/quest-data';
 
 export default class TotalStatsView extends AbstractView {

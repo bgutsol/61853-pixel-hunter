@@ -1,5 +1,5 @@
 import Application from '../../application';
-import Footer from '../footer/footer-view';
+import Footer from '../components/footer-view';
 import GreetingView from './greeting-view';
 
 export default class GreetingPresenter {

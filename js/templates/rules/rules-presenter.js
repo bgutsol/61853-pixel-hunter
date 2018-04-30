@@ -1,6 +1,6 @@
 import Application from '../../application';
 import Header from '../header/header-presenter';
-import Footer from '../footer/footer-view';
+import Footer from '../components/footer-view';
 import RulesView from './rules-view';
 
 export default class RulesPresenter {
