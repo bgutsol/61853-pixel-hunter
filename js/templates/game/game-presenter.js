@@ -1,7 +1,7 @@
 import {GAME_TYPES, ANSWER_TYPES} from '../../data/quest-data';
 import Application from '../../application';
-import getHeader from '../header';
-import FooterView from '../footer-view';
+import Header from '../header/header-presenter';
+import FooterView from '../footer/footer-view';
 import LevelTwoAnswersView from './level-two-answer-view';
 import LevelOneAnswerView from './level-one-answer-view';
 import LevelChoosePaintView from './level-choose-paint-view';
@@ -10,10 +10,8 @@ class GamePresenter {
   constructor(model) {
     this.model = model;
 
-    this.header = getHeader(this.model.state);
-    const level = this.createLevel();
-    level.onAnswer = this.answer.bind(this);
-    this.content = level;
+    this.header = new Header(this.model.state);
+    this.content = this.createLevel();
     this.footer = new FooterView();
 
     this.root = document.createElement(`div`);
@@ -22,6 +20,7 @@ class GamePresenter {
     this.root.appendChild(this.footer.element);
 
     this._interval = null;
+    this.startGame();
   }
 
   createLevel() {
@@ -46,10 +45,14 @@ class GamePresenter {
   }
 
   startGame() {
+    this.model.resetTime();
     this.changeLevel();
 
     this._interval = setInterval(() => {
       this.model.tick();
+      if (this.model.state.time <= 0) {
+        this.answer(false);
+      }
       this.updateHeader();
     }, 1000);
   }
@@ -67,7 +70,7 @@ class GamePresenter {
       isCorrect,
       time: this.model.state.time
     });
-    if (!this.model.isDead() || this.model.hasNextLevel()) {
+    if (!this.model.isDead() && this.model.hasNextLevel()) {
       this.model.nextLevel();
       this.startGame();
     } else {
@@ -76,10 +79,10 @@ class GamePresenter {
   }
 
   get answerTypeByTime() {
-    if (this.model.state.time < 10) {
+    if (this.model.state.time > 20) {
       return ANSWER_TYPES.fast;
     }
-    if (this.model.state.time > 20) {
+    if (this.model.state.time < 10) {
       return ANSWER_TYPES.slow;
     }
     return ANSWER_TYPES.correct;
@@ -95,7 +98,7 @@ class GamePresenter {
   }
 
   updateHeader() {
-    const header = getHeader(this.model.state);
+    const header = new Header(this.model.state);
     this.root.replaceChild(header.element, this.header.element);
     this.header = header;
   }
@@ -112,8 +115,6 @@ class GamePresenter {
     level.onAnswer = this.answer.bind(this);
     this.updateContent(level);
   }
-
-
 }
 
 export default GamePresenter;

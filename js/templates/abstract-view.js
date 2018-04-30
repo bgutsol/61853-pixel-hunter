@@ -1,4 +1,8 @@
-import {createElement} from './util';
+const createElement = (html = ``) => {
+  const template = document.createElement(`div`);
+  template.innerHTML = html;
+  return template;
+};
 
 export default class AbstractView {
   constructor() {

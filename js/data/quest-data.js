@@ -23,6 +23,11 @@ export const ANSWER_TYPES = {
   unknown: `unknown`
 };
 
+export const TOTAL_RESULT_TYPES = {
+  fail: 0,
+  win: 1
+};
+
 export const QUEST_DATA = [
   {
     task: QUESTION_TYPES.chooseTwoAnswers,

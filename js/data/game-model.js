@@ -36,7 +36,11 @@ class GameModel {
   }
 
   tick() {
-    this._state = updateState(this._state, {time: this._state.time + 1});
+    this._state = updateState(this._state, {time: this._state.time - 1});
+  }
+
+  resetTime() {
+    this._state = updateState(this._state, {time: 30});
   }
 
   restart() {

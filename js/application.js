@@ -1,7 +1,7 @@
-import getIntro from './templates/intro';
-import getGreeting from './templates/greeting';
-import getRules from './templates/rules';
-import getStats from './templates/total-stats';
+import Intro from './templates/intro/intro-presenter';
+import Greeting from './templates/greeting/greeting-presenter';
+import Rules from './templates/rules/rules-presenter';
+import Stats from './templates/results/results-presenter';
 import Game from './templates/game/game-presenter';
 import GameModel from './data/game-model';
 
@@ -13,18 +13,18 @@ const changeView = (template) => {
 
 export default class Application {
   static showIntro() {
-    const intro = getIntro();
-    changeView(intro);
+    const intro = new Intro();
+    changeView(intro.element);
   }
 
   static showGreeting() {
-    const greeting = getGreeting();
-    changeView(greeting);
+    const greeting = new Greeting();
+    changeView(greeting.element);
   }
 
   static showRules() {
-    const rules = getRules();
-    changeView(rules);
+    const rules = new Rules();
+    changeView(rules.element);
   }
 
   static showGame(playerName) {
@@ -33,7 +33,7 @@ export default class Application {
   }
 
   static showStats(model) {
-    const stats = getStats(model);
-    changeView(stats);
+    const stats = new Stats(model);
+    changeView(stats.element);
   }
 }

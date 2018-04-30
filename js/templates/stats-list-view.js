@@ -1,4 +1,4 @@
-import AbstractView from '../abstract-view';
+import AbstractView from './abstract-view';
 import {ANSWER_TYPES} from '../data/quest-data';
 
 const drawStatResults = (stats) => {
