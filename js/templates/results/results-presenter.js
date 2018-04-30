@@ -1,5 +1,5 @@
 import Application from '../../application';
-import Header from '../header/header-presenter';
+import Header from '../components/header-view';
 import Footer from '../components/footer-view';
 import ResultsView from './results-view';
 import {TOTAL_RESULT_TYPES} from '../../data/quest-data';
@@ -10,6 +10,7 @@ export default class ResultsPresenter {
     this.model = model;
 
     this.header = new Header();
+    this.header.onBtnBackClick = this.return.bind(this);
     this.footer = new Footer();
     this.content = this.createContent();
 
@@ -24,6 +25,10 @@ export default class ResultsPresenter {
       return new ResultsView(TOTAL_RESULT_TYPES.fail, 0, this.model);
     }
     return new ResultsView(TOTAL_RESULT_TYPES.win, this.score, this.model);
+  }
+
+  return() {
+    Application.showGame(this.model.playerName);
   }
 
   get score() {

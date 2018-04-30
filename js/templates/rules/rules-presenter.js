@@ -1,14 +1,15 @@
 import Application from '../../application';
-import Header from '../header/header-presenter';
+import Header from '../components/header-view';
 import Footer from '../components/footer-view';
 import RulesView from './rules-view';
 
 export default class RulesPresenter {
   constructor() {
     this.header = new Header();
+    this.header.onBtnBackClick = this.return;
     this.footer = new Footer();
     this.content = new RulesView();
-    this.handleAction();
+    this.content.onSubmit = this.submit;
 
     this.root = document.createElement(`div`);
     this.root.appendChild(this.header.element);
@@ -20,13 +21,11 @@ export default class RulesPresenter {
     return this.root;
   }
 
-  handleAction() {
-    this.content.onInput = (value) => {
-      this.content.btnSubmit.disabled = !value;
-    };
+  submit(playerName) {
+    Application.showGame(playerName);
+  }
 
-    this.content.onSubmit = (userName) => {
-      Application.showGame(userName);
-    };
+  return() {
+    Application.showGreeting();
   }
 }

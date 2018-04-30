@@ -1,6 +1,6 @@
 import {GAME_TYPES, ANSWER_TYPES} from '../../data/quest-data';
 import Application from '../../application';
-import Header from '../header/header-presenter';
+import Header from '../components/header-view';
 import Footer from '../components/footer-view';
 import LevelTwoAnswersView from './level-two-answer-view';
 import LevelOneAnswerView from './level-one-answer-view';
@@ -10,7 +10,7 @@ class GamePresenter {
   constructor(model) {
     this.model = model;
 
-    this.header = new Header(this.model.state);
+    this.header = new Header();
     this.content = this.createLevel();
     this.footer = new Footer();
 
@@ -78,6 +78,13 @@ class GamePresenter {
     }
   }
 
+  return() {
+    const isAnswerPositive = confirm(`Are you sure? Your game progress will be lost.`);
+    if (isAnswerPositive) {
+      Application.showGreeting();
+    }
+  }
+
   get answerTypeByTime() {
     if (this.model.state.time > 20) {
       return ANSWER_TYPES.fast;
@@ -99,6 +106,7 @@ class GamePresenter {
 
   updateHeader() {
     const header = new Header(this.model.state);
+    header.onBtnBackClick = this.return.bind(this);
     this.root.replaceChild(header.element, this.header.element);
     this.header = header;
   }
