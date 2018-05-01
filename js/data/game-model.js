@@ -1,5 +1,5 @@
 import {INITIAL_STATE, updateState} from './quest';
-import {QUEST_DATA} from './quest-data';
+import {QUEST_DATA, ANSWER_TYPES} from './quest-data';
 
 class GameModel {
   constructor(playerName) {
@@ -33,6 +33,7 @@ class GameModel {
 
   die() {
     this._state = updateState(this._state, {lives: this._state.lives - 1});
+    this.addStat(ANSWER_TYPES.wrong);
   }
 
   tick() {

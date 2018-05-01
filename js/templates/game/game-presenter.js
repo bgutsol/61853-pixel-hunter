@@ -64,7 +64,6 @@ class GamePresenter {
       this.model.addStat(this.answerTypeByTime);
     } else {
       this.model.die();
-      this.model.addStat(ANSWER_TYPES.wrong);
     }
     this.model.addAnswer({
       isCorrect,
