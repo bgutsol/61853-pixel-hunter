@@ -79,8 +79,7 @@ class GamePresenter {
   }
 
   comeback() {
-    // const isAnswerPositive = confirm(`Are you sure? Your game progress will be lost.`);
-    const isAnswerPositive = true;
+    const isAnswerPositive = confirm(`Are you sure? Your game progress will be lost.`);
     if (isAnswerPositive) {
       Application.showGreeting();
     }
@@ -94,11 +93,6 @@ class GamePresenter {
       return ANSWER_TYPES.slow;
     }
     return ANSWER_TYPES.correct;
-  }
-
-  restart() {
-    this.model.reset();
-    this.startGame();
   }
 
   exit() {
