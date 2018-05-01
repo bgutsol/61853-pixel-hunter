@@ -78,7 +78,7 @@ class GamePresenter {
     }
   }
 
-  return() {
+  comeback() {
     // const isAnswerPositive = confirm(`Are you sure? Your game progress will be lost.`);
     const isAnswerPositive = true;
     if (isAnswerPositive) {
@@ -107,7 +107,7 @@ class GamePresenter {
 
   updateHeader() {
     const header = new Header(this.model.state);
-    header.onBtnBackClick = this.return.bind(this);
+    header.onBtnBackClick = this.comeback.bind(this);
     this.root.replaceChild(header.element, this.header.element);
     this.header = header;
   }

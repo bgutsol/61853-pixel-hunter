@@ -10,7 +10,7 @@ export default class ResultsPresenter {
     this.model = model;
 
     this.header = new Header();
-    this.header.onBtnBackClick = this.return.bind(this);
+    this.header.onBtnBackClick = this.comeback.bind(this);
     this.footer = new Footer();
     this.content = this.createContent();
 
@@ -27,7 +27,7 @@ export default class ResultsPresenter {
     return new ResultsView(TOTAL_RESULT_TYPES.win, this.score, this.model);
   }
 
-  return() {
+  comeback() {
     Application.showGame(this.model.playerName);
   }
 

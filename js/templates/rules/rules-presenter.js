@@ -6,7 +6,7 @@ import RulesView from './rules-view';
 export default class RulesPresenter {
   constructor() {
     this.header = new Header();
-    this.header.onBtnBackClick = this.return;
+    this.header.onBtnBackClick = this.comeback;
     this.footer = new Footer();
     this.content = new RulesView();
     this.content.onSubmit = this.submit;
@@ -25,7 +25,7 @@ export default class RulesPresenter {
     Application.showGame(playerName);
   }
 
-  return() {
+  comeback() {
     Application.showGreeting();
   }
 }
