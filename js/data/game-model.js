@@ -31,7 +31,7 @@ class GameModel {
     this._answers.push(answer);
   }
 
-  die() {
+  onWrongAnswer() {
     this._state = updateState(this._state, {lives: this._state.lives - 1});
     this.addStat(ANSWER_TYPES.wrong);
   }
@@ -50,12 +50,12 @@ class GameModel {
     this._answers = [];
   }
 
-  isDead() {
+  hasLives() {
     return this._state.lives <= 0;
   }
 
   hasNextLevel() {
-    return QUEST_DATA[this._state.level + 1] !== void 0;
+    return Boolean(QUEST_DATA[this._state.level + 1]);
   }
 
   nextLevel() {

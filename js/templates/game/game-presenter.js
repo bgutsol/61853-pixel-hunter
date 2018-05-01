@@ -63,22 +63,24 @@ class GamePresenter {
     if (isCorrect) {
       this.model.addStat(this.answerTypeByTime);
     } else {
-      this.model.die();
+      this.model.onWrongAnswer();
     }
     this.model.addAnswer({
       isCorrect,
       time: this.model.state.time
     });
-    if (!this.model.isDead() && this.model.hasNextLevel()) {
+    if (!this.model.hasLives() && this.model.hasNextLevel()) {
       this.model.nextLevel();
       this.init();
     } else {
-      this.exit();
+      this.endGame();
     }
   }
 
   comeback() {
+    /* eslint-disable no-alert */
     const isAnswerPositive = confirm(`Are you sure? Your game progress will be lost.`);
+    /* eslint-enable no-alert */
     if (isAnswerPositive) {
       Application.showGreeting();
     }
@@ -94,7 +96,7 @@ class GamePresenter {
     return ANSWER_TYPES.correct;
   }
 
-  exit() {
+  endGame() {
     Application.showStats(this.model);
   }
 
