@@ -4,7 +4,7 @@ import {QUEST_DATA} from './quest-data';
 class GameModel {
   constructor(playerName) {
     this.playerName = playerName;
-    this.restart();
+    this.reset();
   }
 
   get state() {
@@ -43,7 +43,7 @@ class GameModel {
     this._state = updateState(this._state, {time: 30});
   }
 
-  restart() {
+  reset() {
     this._state = INITIAL_STATE;
     this._stats = [];
     this._answers = [];

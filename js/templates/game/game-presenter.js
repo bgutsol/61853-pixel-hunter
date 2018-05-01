@@ -97,7 +97,7 @@ class GamePresenter {
   }
 
   restart() {
-    this.model.restart();
+    this.model.reset();
     this.startGame();
   }
 
