@@ -14,29 +14,59 @@ export default class TotalStatsView extends AbstractView {
   }
 
   get template() {
-    return `<div class="result">${this.tableHtml}</div>`;
+    const statsList = new StatsListView(this.stats);
+
+    return `<div class="result">
+    ${this.titleHtml}
+    <table class="result__table">
+      <tr>
+        <td class="result__number">1.</td>
+        <td colspan="2">
+          ${statsList.template}
+        </td>
+        ${this.pointsHtml}
+      </tr>
+      ${this.additionalInfoHtml}
+    </table>
+    </div>`;
   }
 
-  get tableHtml() {
-    const statsList = new StatsListView(this.stats);
+  get titleHtml() {
+    switch (this.result) {
+      case TOTAL_RESULT_TYPES.win:
+        return `<h1>Победа!</h1>`;
+      default:
+        return ``;
+    }
+  }
+
+  get pointsHtml() {
+    let totalResult = ``;
+    let classMod = ``;
+    let pointsCost = ``;
 
     switch (this.result) {
       case TOTAL_RESULT_TYPES.win:
-        const correctAnswersLength = this.answers.filter((answer) => answer.isCorrect).length;
-        const fastAnswersLength = this.stats.filter((mod) => mod === ANSWER_TYPES.fast).length;
-        const slowAnswersLength = this.stats.filter((mod) => mod === ANSWER_TYPES.slow).length;
+        totalResult = this.answers.filter((answer) => answer.isCorrect).length;
+        pointsCost = `×&nbsp;100`;
+        break;
+      case TOTAL_RESULT_TYPES.fail:
+        totalResult = `fail`;
+        classMod = `result__total--final`;
+        break;
+    }
 
-        return `<h1>Победа!</h1>
-        <table class="result__table">
-          <tr>
-            <td class="result__number">1.</td>
-            <td colspan="2">
-              ${statsList.template}
-            </td>
-            <td class="result__points">×&nbsp;100</td>
-            <td class="result__total">${correctAnswersLength}</td>
-          </tr>
-          <tr>
+    return `<td class="result__points">${pointsCost}</td>
+      <td class="result__total ${classMod}">${totalResult}</td>`;
+  }
+
+  get additionalInfoHtml() {
+    const fastAnswersLength = this.stats.filter((mod) => mod === ANSWER_TYPES.fast).length;
+    const slowAnswersLength = this.stats.filter((mod) => mod === ANSWER_TYPES.slow).length;
+
+    switch (this.result) {
+      case TOTAL_RESULT_TYPES.win:
+        return `<tr>
             <td></td>
             <td class="result__extra">Бонус за скорость:</td>
             <td class="result__extra">${fastAnswersLength}&nbsp;<span class="stats__result stats__result--fast"></span></td>
@@ -59,20 +89,7 @@ export default class TotalStatsView extends AbstractView {
           </tr>
           <tr>
             <td colspan="5" class="result__total  result__total--final">${this.score}</td>
-          </tr>
-        </table>`;
-
-      case TOTAL_RESULT_TYPES.fail:
-        return `<table class="result__table">
-        <tr>
-          <td class="result__number">1.</td>
-          <td>
-            ${statsList.template}
-          </td>
-          <td class="result__total"></td>
-          <td class="result__total  result__total--final">fail</td>
-        </tr>
-      </table>`;
+          </tr>`;
       default:
         return ``;
     }
