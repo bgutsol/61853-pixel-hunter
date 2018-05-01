@@ -1,10 +1,21 @@
 import AbstractView from '../abstract-view';
 
+const MAX_LIVES = 3;
+
+const getLivesMods = (lives) => {
+  const emptyLives = new Array(MAX_LIVES - lives).fill(`empty`);
+  const fullLives = new Array(lives).fill(`full`);
+  return [...emptyLives, ...fullLives];
+};
+
 export default class HeaderView extends AbstractView {
-  constructor(time, livesMods) {
+  constructor(state) {
     super();
-    this.time = time;
-    this.livesMods = livesMods;
+
+    if (state) {
+      this.time = state.time;
+      this.livesMods = getLivesMods(state.lives);
+    }
   }
 
   get template() {

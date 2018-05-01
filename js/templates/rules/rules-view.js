@@ -31,7 +31,9 @@ export default class RulesView extends AbstractView {
 
   onSubmit() {}
 
-  onInput() {}
+  onInput(value) {
+    this.btnSubmit.disabled = !value;
+  }
 
   bind() {
     const input = this.element.querySelector(`.rules__input`);

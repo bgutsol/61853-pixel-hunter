@@ -32,37 +32,37 @@ describe(`Check result calculator`, () => {
     ];
     assert.equal(700, calculateResult(answers, 0));
   });
-  it(`should return 1250 when 8 answers are correct, and answers speed is less then 10, and remainingLives is 1`, () => {
+  it(`should return 1250 when 8 answers are correct, and answers speed is more then 20, and remainingLives is 1`, () => {
     const answers = [
-      {isCorrect: true, time: 7},
-      {isCorrect: true, time: 7},
-      {isCorrect: true, time: 7},
-      {isCorrect: true, time: 7},
-      {isCorrect: false, time: 7},
-      {isCorrect: true, time: 7},
-      {isCorrect: true, time: 7},
-      {isCorrect: false, time: 7},
-      {isCorrect: true, time: 7},
-      {isCorrect: true, time: 7},
+      {isCorrect: true, time: 27},
+      {isCorrect: true, time: 27},
+      {isCorrect: true, time: 27},
+      {isCorrect: true, time: 27},
+      {isCorrect: false, time: 27},
+      {isCorrect: true, time: 27},
+      {isCorrect: true, time: 27},
+      {isCorrect: false, time: 27},
+      {isCorrect: true, time: 27},
+      {isCorrect: true, time: 27},
     ];
     assert.equal(1250, calculateResult(answers, 1));
   });
-  it(`should return 1650 when all answers are correct, and answers speed is less then 10, and remainingLives is 3`, () => {
-    const answers = [];
-    for (let i = 0; i < 10; i++) {
-      answers[i] = {
-        isCorrect: true,
-        time: 5
-      };
-    }
-    assert.equal(1650, calculateResult(answers, 3));
-  });
-  it(`should return 650 when all answers are correct, and answers speed is more then 20, and remainingLives is 3`, () => {
+  it(`should return 1650 when all answers are correct, and answers speed is more then 20, and remainingLives is 3`, () => {
     const answers = [];
     for (let i = 0; i < 10; i++) {
       answers[i] = {
         isCorrect: true,
         time: 25
+      };
+    }
+    assert.equal(1650, calculateResult(answers, 3));
+  });
+  it(`should return 650 when all answers are correct, and answers speed is less then 10, and remainingLives is 3`, () => {
+    const answers = [];
+    for (let i = 0; i < 10; i++) {
+      answers[i] = {
+        isCorrect: true,
+        time: 5
       };
     }
     assert.equal(650, calculateResult(answers, 3));

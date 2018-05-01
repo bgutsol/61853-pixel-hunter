@@ -1,7 +1,7 @@
 export const INITIAL_STATE = {
   level: 0,
   lives: 3,
-  time: 0
+  time: 30
 };
 
 export const updateState = (oldState, newState) => {
@@ -44,12 +44,12 @@ export const calculateResult = (userAnswers, remainingLives) => {
 
     result += 100;
 
-    if (time < 10) {
+    if (time > 20) {
       result += 50;
       return;
     }
 
-    if (time > 20) {
+    if (time < 10) {
       result -= 50;
     }
   });

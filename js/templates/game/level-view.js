@@ -1,6 +1,6 @@
-import AbstractView from '../../abstract-view';
-import StatsListView from '../stats-list-view';
-import fitImgSize from '../helpers/fit-image-size';
+import AbstractView from '../abstract-view';
+import StatsListView from '../components/stats-list-view';
+import fitImgSize from './helpers/fit-image-size';
 
 const drawOptionFormInputs = (number) => {
   return `<label class="game__answer game__answer--photo">
