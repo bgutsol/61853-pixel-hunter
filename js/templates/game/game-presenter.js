@@ -20,7 +20,7 @@ class GamePresenter {
     this.root.appendChild(this.footer.element);
 
     this._interval = null;
-    this.startGame();
+    this.init();
   }
 
   createLevel() {
@@ -44,7 +44,7 @@ class GamePresenter {
     clearInterval(this._interval);
   }
 
-  startGame() {
+  init() {
     this.model.resetTime();
     this.changeLevel();
 
@@ -72,7 +72,7 @@ class GamePresenter {
     });
     if (!this.model.isDead() && this.model.hasNextLevel()) {
       this.model.nextLevel();
-      this.startGame();
+      this.init();
     } else {
       this.exit();
     }
