@@ -82,7 +82,8 @@ class GamePresenter {
     const isAnswerPositive = confirm(`Are you sure? Your game progress will be lost.`);
     /* eslint-enable no-alert */
     if (isAnswerPositive) {
-      Application.showGreeting();
+      this.stopGame();
+      Application.showGreeting(this.model.data);
     }
   }
 
