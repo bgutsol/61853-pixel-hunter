@@ -32,12 +32,10 @@ export default class TotalStatsView extends AbstractView {
   }
 
   get titleHtml() {
-    switch (this.result) {
-      case TOTAL_RESULT_TYPES.win:
-        return `<h1>Победа!</h1>`;
-      default:
-        return ``;
+    if (this.result === TOTAL_RESULT_TYPES.win) {
+      return `<h1>Победа!</h1>`;
     }
+    return ``;
   }
 
   get pointsHtml() {
@@ -55,7 +53,6 @@ export default class TotalStatsView extends AbstractView {
         classMod = `result__total--final`;
         break;
     }
-
     return `<td class="result__points">${pointsCost}</td>
       <td class="result__total ${classMod}">${totalResult}</td>`;
   }
@@ -64,9 +61,8 @@ export default class TotalStatsView extends AbstractView {
     const fastAnswersLength = this.stats.filter((mod) => mod === ANSWER_TYPES.fast).length;
     const slowAnswersLength = this.stats.filter((mod) => mod === ANSWER_TYPES.slow).length;
 
-    switch (this.result) {
-      case TOTAL_RESULT_TYPES.win:
-        return `<tr>
+    if (this.result === TOTAL_RESULT_TYPES.win) {
+      return `<tr>
             <td></td>
             <td class="result__extra">Бонус за скорость:</td>
             <td class="result__extra">${fastAnswersLength}&nbsp;<span class="stats__result stats__result--fast"></span></td>
@@ -90,8 +86,7 @@ export default class TotalStatsView extends AbstractView {
           <tr>
             <td colspan="5" class="result__total  result__total--final">${this.score}</td>
           </tr>`;
-      default:
-        return ``;
     }
+    return ``;
   }
 }

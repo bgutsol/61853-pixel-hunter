@@ -1,8 +1,9 @@
 import {INITIAL_STATE, updateState} from './quest';
-import {QUEST_DATA, ANSWER_TYPES} from './quest-data';
+import {ANSWER_TYPES} from './quest-data';
 
 class GameModel {
-  constructor(playerName) {
+  constructor(data, playerName) {
+    this.data = data;
     this.playerName = playerName;
     this.reset();
   }
@@ -12,7 +13,7 @@ class GameModel {
   }
 
   get currentLevel() {
-    return QUEST_DATA[this._state.level];
+    return this.data[this._state.level];
   }
 
   get stats() {
@@ -31,7 +32,7 @@ class GameModel {
     this._answers.push(answer);
   }
 
-  die() {
+  onWrongAnswer() {
     this._state = updateState(this._state, {lives: this._state.lives - 1});
     this.addStat(ANSWER_TYPES.wrong);
   }
@@ -50,12 +51,12 @@ class GameModel {
     this._answers = [];
   }
 
-  isDead() {
+  hasLives() {
     return this._state.lives <= 0;
   }
 
   hasNextLevel() {
-    return QUEST_DATA[this._state.level + 1] !== void 0;
+    return Boolean(this.data[this._state.level + 1]);
   }
 
   nextLevel() {
