@@ -1,7 +1,17 @@
 import LevelView from './level-view.js';
 import {imageTypes} from '../../data/quest-data';
 
-export default class LevelChoosePaintView extends LevelView {
+const getCorrectType = (answers) => {
+  const paintTypeLength = answers.filter((answer) => answer.imgType === imageTypes.PAINT).length;
+  const photoTypeLength = answers.filter((answer) => answer.imgType === imageTypes.PHOTO).length;
+
+  if (paintTypeLength > photoTypeLength) {
+    return imageTypes.PHOTO;
+  }
+  return imageTypes.PAINT;
+};
+
+export default class LevelOneOfThreeView extends LevelView {
   constructor(data, stats) {
     super(data, stats);
 
@@ -11,10 +21,12 @@ export default class LevelChoosePaintView extends LevelView {
 
   bind() {
     const options = this.element.querySelectorAll(`.game__option`);
+    const correctAnswerType = getCorrectType(this.data.answers);
+    const correctAnswerIndex = this.data.answers.findIndex((answer) => answer.imgType === correctAnswerType);
+
     const handleOptionClick = (e) => {
       const target = e.target;
       const targetOptionIndex = parseInt(target.getAttribute(`data-index`), 10);
-      const correctAnswerIndex = this.data.answers.findIndex((answer) => answer.imgType === imageTypes.PAINT);
 
       this.onAnswer(targetOptionIndex === correctAnswerIndex);
     };
