@@ -51,10 +51,15 @@ class GamePresenter {
 
     this._interval = setInterval(() => {
       this.model.tick();
+
+      if (this.model.state.time === 5) {
+        this.header.startTimerBlinking();
+      }
       if (this.model.state.time <= 0) {
         this.answer(false);
       }
-      this.updateHeader();
+
+      this.header.updateTime(this.model.state.time);
     }, 1000);
   }
 

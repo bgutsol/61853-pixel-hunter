@@ -49,6 +49,34 @@ export default class HeaderView extends AbstractView {
     return `<div class="game__lives">${livesImgs}</div>`;
   }
 
+  get timer() {
+    return this.element.querySelector(`.game__timer`);
+  }
+
+  updateTime(time) {
+    this.timer.textContent = time;
+  }
+
+  startTimerBlinking() {
+    const INTERVAL = 500;
+    let isVisible = true;
+
+    const blink = () => {
+      if (isVisible) {
+        this.timer.style.display = `none`;
+        isVisible = false;
+      } else {
+        this.timer.style.display = `block`;
+        isVisible = true;
+      }
+    };
+
+    setTimeout(function run() {
+      blink();
+      setTimeout(run, INTERVAL);
+    }, INTERVAL);
+  }
+
   onBtnBackClick() {}
 
   bind() {
