@@ -42,9 +42,8 @@ export default class Application {
   }
 
   static showStats(results, playerName) {
-    Loader.uploadResults(results, playerName).
-        then(() => Loader.loadResults(playerName)).
-        then((data) => changeView(new Stats(data, playerName).element));
+    const stats = new Stats(results, playerName);
+    changeView(stats.element);
   }
 
   static showError(error) {
