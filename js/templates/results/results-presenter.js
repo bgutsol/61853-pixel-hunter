@@ -2,17 +2,20 @@ import Application from '../../application';
 import Header from '../components/header-view';
 import Footer from '../components/footer-view';
 import ResultsView from './results-view';
-import {TOTAL_RESULT_TYPES} from '../../data/quest-data';
-import {calculateResult} from '../../data/quest';
+
+const sortResults = (results) => {
+  return results.sort((first, second) => second.date - first.date);
+};
 
 export default class ResultsPresenter {
-  constructor(model) {
-    this.model = model;
+  constructor(results, playerName) {
+    this.results = sortResults(results);
+    this.playerName = playerName;
 
     this.header = new Header();
     this.header.onBtnBackClick = this.comeback.bind(this);
     this.footer = new Footer();
-    this.content = this.createContent();
+    this.content = new ResultsView(this.results);
 
     this.root = document.createElement(`div`);
     this.root.appendChild(this.header.element);
@@ -20,19 +23,8 @@ export default class ResultsPresenter {
     this.root.appendChild(this.footer.element);
   }
 
-  createContent() {
-    if (this.model.answers.length < 10) {
-      return new ResultsView(TOTAL_RESULT_TYPES.fail, 0, this.model);
-    }
-    return new ResultsView(TOTAL_RESULT_TYPES.win, this.score, this.model);
-  }
-
   comeback() {
-    Application.showGame(this.model.playerName);
-  }
-
-  get score() {
-    return calculateResult(this.model.answers, this.model.state.lives);
+    Application.showGame(this.playerName);
   }
 
   get element() {

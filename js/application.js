@@ -41,9 +41,10 @@ export default class Application {
     changeView(game.element);
   }
 
-  static showStats(model) {
-    const stats = new Stats(model);
-    changeView(stats.element);
+  static showStats(results, playerName) {
+    Loader.uploadResults(results, playerName).
+        then(() => Loader.loadResults(playerName)).
+        then((data) => changeView(new Stats(data, playerName).element));
   }
 
   static showError(error) {
