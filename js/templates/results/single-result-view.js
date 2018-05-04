@@ -1,6 +1,6 @@
 import AbstractView from '../abstract-view';
 import StatsListView from '../components/stats-list-view';
-import {answerTypes, TOTAL_RESULT_TYPES} from '../../data/quest-data';
+import {answerTypes, totalResultTypes} from '../../data/quest-data';
 
 export default class SingleResult extends AbstractView {
   constructor(result, number) {
@@ -11,9 +11,9 @@ export default class SingleResult extends AbstractView {
     this.number = number + 1;
     if (this.lives > 0) {
       this.score = result.totalScore;
-      this.status = TOTAL_RESULT_TYPES.win;
+      this.status = totalResultTypes.WIN;
     } else {
-      this.status = TOTAL_RESULT_TYPES.fail;
+      this.status = totalResultTypes.FAIL;
     }
   }
 
@@ -38,11 +38,11 @@ export default class SingleResult extends AbstractView {
     let pointsCost = ``;
 
     switch (this.status) {
-      case TOTAL_RESULT_TYPES.win:
+      case totalResultTypes.WIN:
         totalResult = this.stats.filter((mod) => mod === answerTypes.FAST || mod === answerTypes.CORRECT).length;
         pointsCost = `×&nbsp;100`;
         break;
-      case TOTAL_RESULT_TYPES.fail:
+      case totalResultTypes.FAIL:
         totalResult = `fail`;
         classMod = `result__total--final`;
         break;
@@ -55,7 +55,7 @@ export default class SingleResult extends AbstractView {
     const fastAnswersLength = this.stats.filter((mod) => mod === answerTypes.FAST).length;
     const slowAnswersLength = this.stats.filter((mod) => mod === answerTypes.SLOW).length;
 
-    if (this.status === TOTAL_RESULT_TYPES.win) {
+    if (this.status === totalResultTypes.WIN) {
       return `<tr>
             <td></td>
             <td class="result__extra">Бонус за скорость:</td>

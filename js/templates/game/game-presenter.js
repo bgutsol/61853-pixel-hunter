@@ -4,7 +4,7 @@ import Footer from '../components/footer-view';
 import LevelTwoAnswersView from './level-two-answer-view';
 import LevelOneAnswerView from './level-one-answer-view';
 import LevelChoosePaintView from './level-choose-paint-view';
-import {GAME_TYPES, answerTypes} from '../../data/quest-data';
+import {gameTypes, answerTypes} from '../../data/quest-data';
 import {calculateResult} from '../../data/quest';
 
 class GamePresenter {
@@ -26,11 +26,11 @@ class GamePresenter {
 
   createLevel() {
     switch (this.model.currentLevel.type) {
-      case GAME_TYPES.chooseTwoAnswers:
+      case gameTypes.CHOOSE_TWO_ANSWERS:
         return new LevelTwoAnswersView(this.model.currentLevel, this.model.stats);
-      case GAME_TYPES.chooseOneAnswer:
+      case gameTypes.CHOOSE_ONE_ANSWER:
         return new LevelOneAnswerView(this.model.currentLevel, this.model.stats);
-      case GAME_TYPES.choosePaint:
+      case gameTypes.CHOOSE_ONE_OF_THREE:
         return new LevelChoosePaintView(this.model.currentLevel, this.model.stats);
       default:
         return null;

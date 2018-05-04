@@ -1,5 +1,5 @@
 import LevelView from './level-view.js';
-import {IMAGE_TYPES} from '../../data/quest-data';
+import {imageTypes} from '../../data/quest-data';
 
 export default class LevelChoosePaintView extends LevelView {
   constructor(data, stats) {
@@ -14,7 +14,7 @@ export default class LevelChoosePaintView extends LevelView {
     const handleOptionClick = (e) => {
       const target = e.target;
       const targetOptionIndex = parseInt(target.getAttribute(`data-index`), 10);
-      const correctAnswerIndex = this.data.answers.findIndex((answer) => answer.imgType === IMAGE_TYPES.paint);
+      const correctAnswerIndex = this.data.answers.findIndex((answer) => answer.imgType === imageTypes.PAINT);
 
       this.onAnswer(targetOptionIndex === correctAnswerIndex);
     };

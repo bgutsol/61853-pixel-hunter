@@ -1,12 +1,12 @@
-export const IMAGE_TYPES = {
-  photo: `photo`,
-  paint: `paint`
+export const imageTypes = {
+  PHOTO: `photo`,
+  PAINT: `paint`
 };
 
-export const GAME_TYPES = {
-  chooseTwoAnswers: 0,
-  chooseOneAnswer: 1,
-  choosePaint: 2
+export const gameTypes = {
+  CHOOSE_TWO_ANSWERS: 0,
+  CHOOSE_ONE_ANSWER: 1,
+  CHOOSE_ONE_OF_THREE: 2
 };
 
 export const answerTypes = {
@@ -17,7 +17,7 @@ export const answerTypes = {
   UNKNOWN: `unknown`
 };
 
-export const TOTAL_RESULT_TYPES = {
-  fail: 0,
-  win: 1
+export const totalResultTypes = {
+  FAIL: 0,
+  WIN: 1
 };
