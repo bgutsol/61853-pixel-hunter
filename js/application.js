@@ -41,8 +41,8 @@ export default class Application {
     changeView(game.element);
   }
 
-  static showStats(model) {
-    const stats = new Stats(model);
+  static showStats(results, playerName) {
+    const stats = new Stats(results, playerName);
     changeView(stats.element);
   }
 

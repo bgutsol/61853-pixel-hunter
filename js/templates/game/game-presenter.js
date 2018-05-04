@@ -1,10 +1,11 @@
-import {GAME_TYPES, ANSWER_TYPES} from '../../data/quest-data';
 import Application from '../../application';
 import Header from '../components/header-view';
 import Footer from '../components/footer-view';
 import LevelTwoAnswersView from './level-two-answer-view';
 import LevelOneAnswerView from './level-one-answer-view';
 import LevelChoosePaintView from './level-choose-paint-view';
+import {GAME_TYPES, ANSWER_TYPES} from '../../data/quest-data';
+import {calculateResult} from '../../data/quest';
 
 class GamePresenter {
   constructor(model) {
@@ -69,7 +70,7 @@ class GamePresenter {
       isCorrect,
       time: this.model.state.time
     });
-    if (!this.model.hasLives() && this.model.hasNextLevel()) {
+    if (this.model.hasLives() && this.model.hasNextLevel()) {
       this.model.nextLevel();
       this.init();
     } else {
@@ -98,7 +99,16 @@ class GamePresenter {
   }
 
   endGame() {
-    Application.showStats(this.model);
+    const results = {
+      stats: this.model.stats,
+      lives: this.model.lives
+    };
+
+    if (this.model.hasLives()) {
+      results.totalScore = calculateResult(this.model.answers, this.model.lives);
+    }
+
+    Application.showStats(results, this.model.playerName);
   }
 
   updateHeader() {

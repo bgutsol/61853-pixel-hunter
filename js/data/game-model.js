@@ -24,6 +24,10 @@ class GameModel {
     return this._answers;
   }
 
+  get lives() {
+    return this._state.lives;
+  }
+
   addStat(stat) {
     this.stats.push(stat);
   }
@@ -52,7 +56,7 @@ class GameModel {
   }
 
   hasLives() {
-    return this._state.lives <= 0;
+    return this._state.lives > 0;
   }
 
   hasNextLevel() {
