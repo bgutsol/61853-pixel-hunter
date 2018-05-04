@@ -4,7 +4,7 @@ import Footer from '../components/footer-view';
 import LevelTwoAnswersView from './level-two-answer-view';
 import LevelOneAnswerView from './level-one-answer-view';
 import LevelChoosePaintView from './level-choose-paint-view';
-import {GAME_TYPES, ANSWER_TYPES} from '../../data/quest-data';
+import {GAME_TYPES, answerTypes} from '../../data/quest-data';
 import {calculateResult} from '../../data/quest';
 
 class GamePresenter {
@@ -90,12 +90,12 @@ class GamePresenter {
 
   get answerTypeByTime() {
     if (this.model.state.time > 20) {
-      return ANSWER_TYPES.fast;
+      return answerTypes.FAST;
     }
     if (this.model.state.time < 10) {
-      return ANSWER_TYPES.slow;
+      return answerTypes.SLOW;
     }
-    return ANSWER_TYPES.correct;
+    return answerTypes.CORRECT;
   }
 
   endGame() {

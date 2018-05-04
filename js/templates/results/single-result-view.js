@@ -1,6 +1,6 @@
 import AbstractView from '../abstract-view';
 import StatsListView from '../components/stats-list-view';
-import {ANSWER_TYPES, TOTAL_RESULT_TYPES} from '../../data/quest-data';
+import {answerTypes, TOTAL_RESULT_TYPES} from '../../data/quest-data';
 
 export default class SingleResult extends AbstractView {
   constructor(result, number) {
@@ -39,7 +39,7 @@ export default class SingleResult extends AbstractView {
 
     switch (this.status) {
       case TOTAL_RESULT_TYPES.win:
-        totalResult = this.stats.filter((mod) => mod === ANSWER_TYPES.fast || mod === ANSWER_TYPES.correct).length;
+        totalResult = this.stats.filter((mod) => mod === answerTypes.FAST || mod === answerTypes.CORRECT).length;
         pointsCost = `×&nbsp;100`;
         break;
       case TOTAL_RESULT_TYPES.fail:
@@ -52,8 +52,8 @@ export default class SingleResult extends AbstractView {
   }
 
   get additionalInfoHtml() {
-    const fastAnswersLength = this.stats.filter((mod) => mod === ANSWER_TYPES.fast).length;
-    const slowAnswersLength = this.stats.filter((mod) => mod === ANSWER_TYPES.slow).length;
+    const fastAnswersLength = this.stats.filter((mod) => mod === answerTypes.FAST).length;
+    const slowAnswersLength = this.stats.filter((mod) => mod === answerTypes.SLOW).length;
 
     if (this.status === TOTAL_RESULT_TYPES.win) {
       return `<tr>
