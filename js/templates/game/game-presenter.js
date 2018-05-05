@@ -5,7 +5,7 @@ import LevelTwoAnswersView from './level-two-answer-view';
 import LevelOneAnswerView from './level-one-answer-view';
 import LevelOneOfThreeView from './level-one-of-three-view';
 import {gameTypes, answerTypes} from '../../data/quest-data';
-import {calculateResult, createTimer} from '../../data/quest';
+import {INITIAL_TIME, calculateResult, createTimer} from '../../data/quest';
 
 class GamePresenter {
   constructor(model) {
@@ -49,7 +49,7 @@ class GamePresenter {
   init() {
     this.changeLevel();
 
-    this._timer = createTimer(this.model.state.time);
+    this._timer = createTimer(INITIAL_TIME);
     this._interval = setInterval(() => {
       this._timer.tick();
 
