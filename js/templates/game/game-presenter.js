@@ -3,8 +3,8 @@ import Header from '../components/header-view';
 import Footer from '../components/footer-view';
 import LevelTwoAnswersView from './level-two-answer-view';
 import LevelOneAnswerView from './level-one-answer-view';
-import LevelChoosePaintView from './level-choose-paint-view';
-import {GAME_TYPES, ANSWER_TYPES} from '../../data/quest-data';
+import LevelOneOfThreeView from './level-one-of-three-view';
+import {gameTypes, answerTypes} from '../../data/quest-data';
 import {calculateResult} from '../../data/quest';
 
 class GamePresenter {
@@ -26,12 +26,12 @@ class GamePresenter {
 
   createLevel() {
     switch (this.model.currentLevel.type) {
-      case GAME_TYPES.chooseTwoAnswers:
+      case gameTypes.CHOOSE_TWO_ANSWERS:
         return new LevelTwoAnswersView(this.model.currentLevel, this.model.stats);
-      case GAME_TYPES.chooseOneAnswer:
+      case gameTypes.CHOOSE_ONE_ANSWER:
         return new LevelOneAnswerView(this.model.currentLevel, this.model.stats);
-      case GAME_TYPES.choosePaint:
-        return new LevelChoosePaintView(this.model.currentLevel, this.model.stats);
+      case gameTypes.CHOOSE_ONE_OF_THREE:
+        return new LevelOneOfThreeView(this.model.currentLevel, this.model.stats);
       default:
         return null;
     }
@@ -51,10 +51,15 @@ class GamePresenter {
 
     this._interval = setInterval(() => {
       this.model.tick();
+
+      if (this.model.state.time === 5) {
+        this.header.startTimerBlinking();
+      }
       if (this.model.state.time <= 0) {
         this.answer(false);
       }
-      this.updateHeader();
+
+      this.header.updateTime(this.model.state.time);
     }, 1000);
   }
 
@@ -90,12 +95,12 @@ class GamePresenter {
 
   get answerTypeByTime() {
     if (this.model.state.time > 20) {
-      return ANSWER_TYPES.fast;
+      return answerTypes.FAST;
     }
     if (this.model.state.time < 10) {
-      return ANSWER_TYPES.slow;
+      return answerTypes.SLOW;
     }
-    return ANSWER_TYPES.correct;
+    return answerTypes.CORRECT;
   }
 
   endGame() {

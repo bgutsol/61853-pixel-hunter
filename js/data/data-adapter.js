@@ -1,14 +1,14 @@
-import {GAME_TYPES, IMAGE_TYPES} from './quest-data';
+import {gameTypes, imageTypes} from './quest-data';
 
 const serverToTaskTypeMapper = {
-  'two-of-two': GAME_TYPES.chooseTwoAnswers,
-  'tinder-like': GAME_TYPES.chooseOneAnswer,
-  'one-of-three': GAME_TYPES.choosePaint,
+  'two-of-two': gameTypes.CHOOSE_TWO_ANSWERS,
+  'tinder-like': gameTypes.CHOOSE_ONE_ANSWER,
+  'one-of-three': gameTypes.CHOOSE_ONE_OF_THREE,
 };
 
 const serverToImgTypeMapper = {
-  'photo': IMAGE_TYPES.photo,
-  'painting': IMAGE_TYPES.paint
+  'photo': imageTypes.PHOTO,
+  'painting': imageTypes.PAINT
 };
 
 const preprocessAnswers = (answers) => answers.map((answer) => {
