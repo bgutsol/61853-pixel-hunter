@@ -119,7 +119,7 @@ class GamePresenter {
   }
 
   updateHeader() {
-    const header = new Header(this.model.state);
+    const header = new Header(this.model.state, INITIAL_TIME);
     header.onBtnBackClick = this.comeback.bind(this);
     this.root.replaceChild(header.element, this.header.element);
     this.header = header;
