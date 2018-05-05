@@ -53,7 +53,7 @@ class GamePresenter {
     this._interval = setInterval(() => {
       this._timer.tick();
 
-      if (this._timer === 5) {
+      if (this._timer.time === 5) {
         this.header.startTimerBlinking();
       }
       if (this._timer.isOver) {
