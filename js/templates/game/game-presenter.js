@@ -5,7 +5,7 @@ import LevelTwoAnswersView from './level-two-answer-view';
 import LevelOneAnswerView from './level-one-answer-view';
 import LevelOneOfThreeView from './level-one-of-three-view';
 import {gameTypes, answerTypes} from '../../data/quest-data';
-import {calculateResult} from '../../data/quest';
+import {INITIAL_TIME, calculateResult, createTimer} from '../../data/quest';
 
 class GamePresenter {
   constructor(model) {
@@ -21,6 +21,7 @@ class GamePresenter {
     this.root.appendChild(this.footer.element);
 
     this._interval = null;
+    this._timer = null;
     this.init();
   }
 
@@ -46,20 +47,21 @@ class GamePresenter {
   }
 
   init() {
-    this.model.resetTime();
     this.changeLevel();
 
+    this._timer = createTimer(INITIAL_TIME);
     this._interval = setInterval(() => {
-      this.model.tick();
+      this._timer.tick();
 
-      if (this.model.state.time === 5) {
+      if (this._timer.time === 5) {
         this.header.startTimerBlinking();
       }
-      if (this.model.state.time <= 0) {
+      if (this._timer.isOver) {
         this.answer(false);
+        return;
       }
 
-      this.header.updateTime(this.model.state.time);
+      this.header.updateTime(this._timer.time);
     }, 1000);
   }
 
@@ -73,7 +75,7 @@ class GamePresenter {
     }
     this.model.addAnswer({
       isCorrect,
-      time: this.model.state.time
+      time: this._timer.time
     });
     if (this.model.hasLives() && this.model.hasNextLevel()) {
       this.model.nextLevel();
@@ -94,10 +96,10 @@ class GamePresenter {
   }
 
   get answerTypeByTime() {
-    if (this.model.state.time > 20) {
+    if (this._timer.time > 20) {
       return answerTypes.FAST;
     }
-    if (this.model.state.time < 10) {
+    if (this._timer.time < 10) {
       return answerTypes.SLOW;
     }
     return answerTypes.CORRECT;
@@ -117,7 +119,7 @@ class GamePresenter {
   }
 
   updateHeader() {
-    const header = new Header(this.model.state);
+    const header = new Header(this.model.state, INITIAL_TIME);
     header.onBtnBackClick = this.comeback.bind(this);
     this.root.replaceChild(header.element, this.header.element);
     this.header = header;

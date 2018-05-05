@@ -1,8 +1,9 @@
 export const INITIAL_STATE = {
   level: 0,
-  lives: 3,
-  time: 30
+  lives: 3
 };
+
+export const INITIAL_TIME = 30;
 
 export const updateState = (oldState, newState) => {
   return Object.assign({}, oldState, newState);

@@ -9,11 +9,11 @@ const getLivesMods = (lives) => {
 };
 
 export default class HeaderView extends AbstractView {
-  constructor(state) {
+  constructor(state, time) {
     super();
 
+    this.time = time;
     if (state) {
-      this.time = state.time;
       this.livesMods = getLivesMods(state.lives);
     }
   }

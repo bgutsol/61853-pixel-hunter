@@ -41,14 +41,6 @@ class GameModel {
     this.addStat(answerTypes.WRONG);
   }
 
-  tick() {
-    this._state = updateState(this._state, {time: this._state.time - 1});
-  }
-
-  resetTime() {
-    this._state = updateState(this._state, {time: 30});
-  }
-
   reset() {
     this._state = INITIAL_STATE;
     this._stats = [];
