@@ -21,6 +21,7 @@ class GamePresenter {
     this.root.appendChild(this.footer.element);
 
     this._interval = null;
+    this._timer = null;
     this.init();
   }
 
@@ -48,19 +49,19 @@ class GamePresenter {
   init() {
     this.changeLevel();
 
-    const timer = createTimer(this.model.state.time);
+    this._timer = createTimer(this.model.state.time);
     this._interval = setInterval(() => {
-      timer.tick();
+      this._timer.tick();
 
-      if (timer.time === 5) {
+      if (this._timer === 5) {
         this.header.startTimerBlinking();
       }
-      if (timer.isOver) {
+      if (this._timer.isOver) {
         this.answer(false);
         return;
       }
 
-      this.header.updateTime(timer.time);
+      this.header.updateTime(this._timer.time);
     }, 1000);
   }
 
@@ -74,7 +75,7 @@ class GamePresenter {
     }
     this.model.addAnswer({
       isCorrect,
-      time: this.model.state.time
+      time: this._timer.time
     });
     if (this.model.hasLives() && this.model.hasNextLevel()) {
       this.model.nextLevel();
@@ -95,10 +96,10 @@ class GamePresenter {
   }
 
   get answerTypeByTime() {
-    if (this.model.state.time > 20) {
+    if (this._timer.time > 20) {
       return answerTypes.FAST;
     }
-    if (this.model.state.time < 10) {
+    if (this._timer.time < 10) {
       return answerTypes.SLOW;
     }
     return answerTypes.CORRECT;
