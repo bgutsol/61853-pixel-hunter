@@ -5,7 +5,7 @@ import LevelTwoAnswersView from './level-two-answer-view';
 import LevelOneAnswerView from './level-one-answer-view';
 import LevelOneOfThreeView from './level-one-of-three-view';
 import {gameTypes, answerTypes} from '../../data/quest-data';
-import {calculateResult} from '../../data/quest';
+import {calculateResult, createTimer} from '../../data/quest';
 
 class GamePresenter {
   constructor(model) {
@@ -46,20 +46,21 @@ class GamePresenter {
   }
 
   init() {
-    this.model.resetTime();
     this.changeLevel();
 
+    const timer = createTimer(this.model.state.time);
     this._interval = setInterval(() => {
-      this.model.tick();
+      timer.tick();
 
-      if (this.model.state.time === 5) {
+      if (timer.time === 5) {
         this.header.startTimerBlinking();
       }
-      if (this.model.state.time <= 0) {
+      if (timer.isOver) {
         this.answer(false);
+        return;
       }
 
-      this.header.updateTime(this.model.state.time);
+      this.header.updateTime(timer.time);
     }, 1000);
   }
 
