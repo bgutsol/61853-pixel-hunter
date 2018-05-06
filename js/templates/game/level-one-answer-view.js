@@ -14,8 +14,8 @@ export default class LevelOneAnswerView extends LevelView {
       this.onAnswer(input.value === this.data.answers[0].imgType);
     };
 
-    for (let i = 0; i < inputs.length; i++) {
-      inputs[i].addEventListener(`change`, handleInputChange);
+    for (const input of inputs) {
+      input.addEventListener(`change`, handleInputChange);
     }
   }
 }

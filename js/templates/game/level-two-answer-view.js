@@ -13,8 +13,8 @@ export default class LevelTwoAnswersView extends LevelView {
       }
     };
 
-    for (let i = 0; i < inputs.length; i++) {
-      inputs[i].addEventListener(`change`, handleInputChange);
+    for (const input of inputs) {
+      input.addEventListener(`change`, handleInputChange);
     }
   }
 }

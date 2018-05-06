@@ -30,8 +30,8 @@ export default class LevelOneOfThreeView extends LevelView {
       this.onAnswer(targetOptionIndex === correctAnswerIndex);
     };
 
-    for (let i = 0; i < options.length; i++) {
-      options[i].addEventListener(`click`, handleOptionClick);
+    for (const option of options) {
+      option.addEventListener(`click`, handleOptionClick);
     }
   }
 }
