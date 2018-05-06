@@ -1,15 +1,15 @@
-export const imageTypes = {
+export const ImageType = {
   PHOTO: `photo`,
   PAINT: `paint`
 };
 
-export const gameTypes = {
+export const GameType = {
   CHOOSE_TWO_ANSWERS: 0,
   CHOOSE_ONE_ANSWER: 1,
   CHOOSE_ONE_OF_THREE: 2
 };
 
-export const answerTypes = {
+export const AnswerType = {
   WRONG: `wrong`,
   CORRECT: `correct`,
   SLOW: `slow`,
@@ -17,7 +17,7 @@ export const answerTypes = {
   UNKNOWN: `unknown`
 };
 
-export const totalResultTypes = {
+export const TotalResultType = {
   FAIL: 0,
   WIN: 1
 };

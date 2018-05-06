@@ -4,7 +4,7 @@ import Footer from '../components/footer-view';
 import LevelTwoAnswersView from './level-two-answer-view';
 import LevelOneAnswerView from './level-one-answer-view';
 import LevelOneOfThreeView from './level-one-of-three-view';
-import {gameTypes, answerTypes} from '../../data/quest-data';
+import {GameType, AnswerType} from '../../data/quest-data';
 import {INITIAL_TIME, calculateResult, createTimer} from '../../data/quest';
 
 class GamePresenter {
@@ -27,11 +27,11 @@ class GamePresenter {
 
   createLevel() {
     switch (this.model.currentLevel.type) {
-      case gameTypes.CHOOSE_TWO_ANSWERS:
+      case GameType.CHOOSE_TWO_ANSWERS:
         return new LevelTwoAnswersView(this.model.currentLevel, this.model.stats);
-      case gameTypes.CHOOSE_ONE_ANSWER:
+      case GameType.CHOOSE_ONE_ANSWER:
         return new LevelOneAnswerView(this.model.currentLevel, this.model.stats);
-      case gameTypes.CHOOSE_ONE_OF_THREE:
+      case GameType.CHOOSE_ONE_OF_THREE:
         return new LevelOneOfThreeView(this.model.currentLevel, this.model.stats);
       default:
         return null;
@@ -97,12 +97,12 @@ class GamePresenter {
 
   get answerTypeByTime() {
     if (this._timer.time > 20) {
-      return answerTypes.FAST;
+      return AnswerType.FAST;
     }
     if (this._timer.time < 10) {
-      return answerTypes.SLOW;
+      return AnswerType.SLOW;
     }
-    return answerTypes.CORRECT;
+    return AnswerType.CORRECT;
   }
 
   endGame() {

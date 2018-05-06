@@ -1,13 +1,13 @@
 import LevelView from './level-view.js';
-import {imageTypes} from '../../data/quest-data';
+import {ImageType} from '../../data/quest-data';
 
 const getAnswerType = (answers) => {
-  const paintTypeLength = answers.filter((answer) => answer.imgType === imageTypes.PAINT).length;
+  const paintTypeLength = answers.filter((answer) => answer.imgType === ImageType.PAINT).length;
 
   if (paintTypeLength > 1) {
-    return imageTypes.PHOTO;
+    return ImageType.PHOTO;
   }
-  return imageTypes.PAINT;
+  return ImageType.PAINT;
 };
 
 export default class LevelOneOfThreeView extends LevelView {
