@@ -1,8 +1,8 @@
 import AbstractView from '../abstract-view';
-import {answerTypes} from '../../data/quest-data';
+import {AnswerType} from '../../data/quest-data';
 
 const drawStatResults = (stats) => {
-  const defaultArray = new Array(10 - stats.length).fill(answerTypes.UNKNOWN);
+  const defaultArray = new Array(10 - stats.length).fill(AnswerType.UNKNOWN);
   const statsArray = [...stats, ...defaultArray];
 
   return statsArray.map((mod) => {

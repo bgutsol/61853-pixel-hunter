@@ -1,5 +1,5 @@
 import {INITIAL_STATE, updateState} from './quest';
-import {answerTypes} from './quest-data';
+import {AnswerType} from './quest-data';
 
 class GameModel {
   constructor(data, playerName) {
@@ -38,7 +38,7 @@ class GameModel {
 
   onWrongAnswer() {
     this._state = updateState(this._state, {lives: this._state.lives - 1});
-    this.addStat(answerTypes.WRONG);
+    this.addStat(AnswerType.WRONG);
   }
 
   reset() {

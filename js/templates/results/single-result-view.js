@@ -1,6 +1,6 @@
 import AbstractView from '../abstract-view';
 import StatsListView from '../components/stats-list-view';
-import {answerTypes, totalResultTypes} from '../../data/quest-data';
+import {AnswerType, TotalResultType} from '../../data/quest-data';
 
 export default class SingleResult extends AbstractView {
   constructor(result, number) {
@@ -11,9 +11,9 @@ export default class SingleResult extends AbstractView {
     this.number = number + 1;
     if (this.lives > 0) {
       this.score = result.totalScore;
-      this.status = totalResultTypes.WIN;
+      this.status = TotalResultType.WIN;
     } else {
-      this.status = totalResultTypes.FAIL;
+      this.status = TotalResultType.FAIL;
     }
   }
 
@@ -38,11 +38,11 @@ export default class SingleResult extends AbstractView {
     let pointsCost = ``;
 
     switch (this.status) {
-      case totalResultTypes.WIN:
-        totalResult = this.stats.filter((mod) => mod === answerTypes.FAST || mod === answerTypes.CORRECT).length;
+      case TotalResultType.WIN:
+        totalResult = this.stats.filter((mod) => mod === AnswerType.FAST || mod === AnswerType.CORRECT).length;
         pointsCost = `×&nbsp;100`;
         break;
-      case totalResultTypes.FAIL:
+      case TotalResultType.FAIL:
         totalResult = `fail`;
         classMod = `result__total--final`;
         break;
@@ -52,10 +52,10 @@ export default class SingleResult extends AbstractView {
   }
 
   get additionalInfoHtml() {
-    const fastAnswersLength = this.stats.filter((mod) => mod === answerTypes.FAST).length;
-    const slowAnswersLength = this.stats.filter((mod) => mod === answerTypes.SLOW).length;
+    const fastAnswersLength = this.stats.filter((mod) => mod === AnswerType.FAST).length;
+    const slowAnswersLength = this.stats.filter((mod) => mod === AnswerType.SLOW).length;
 
-    if (this.status === totalResultTypes.WIN) {
+    if (this.status === TotalResultType.WIN) {
       return `<tr>
             <td></td>
             <td class="result__extra">Бонус за скорость:</td>
